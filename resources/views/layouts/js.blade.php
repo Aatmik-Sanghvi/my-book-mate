@@ -13,6 +13,7 @@
 <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('assets/js/moment.js') }}"></script>
 <script src="{{ asset('assets/js/common.js') }}"></script>
+<script src="{{ asset('assets/dynamicPart/js/dashboard.js') }}"></script>
 
 <script>
     var _token = $("input[name='_token']").val();
