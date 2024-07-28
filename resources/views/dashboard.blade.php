@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.sidebar')
 
-@section('content')
+@section('main-dashboard-component')
     Dashboard
 @endsection
