@@ -11,8 +11,8 @@
 
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
-<script src="https://js.stripe.com/v3/"></script>
 <script src="{{ asset('assets/js/moment.js') }}"></script>
+<script src="{{ asset('assets/js/common.js') }}"></script>
 
 <script>
     var _token = $("input[name='_token']").val();
