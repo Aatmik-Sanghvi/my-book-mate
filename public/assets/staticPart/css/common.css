@@ -73,13 +73,22 @@ html {
     color: #F3F7EC; /* Ensure color remains the same on hover */
 }
 
+.nav-item{
+    margin-left: 2px;
+}
+
 .nav-item a{
     color: #F3F7EC;
     font-weight: 700;
 }
 
 .nav-item:hover a{
-    background-color: #78ABA8;
+    background-color: #006989;
     border-radius: 3px;
     color: white;
+}
+
+.nav-link.inThatPage {
+    background-color: #006989;
+    color: #F3F7EC;
 }
