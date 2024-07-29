@@ -30,10 +30,27 @@ Route::get('about-us',function(){
     return view('aboutUs');
 })->name('about-us');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+
+Route::middleware('auth')->group(function () {
+    // User Profile
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Inbox for the books
+    Route::get('my-inbox',function(){
+        return view('myInbox');
+    })->name('my-inbox');
+
+    // Add my books
+    Route::get('add-books',function(){
+        return view('addBooks');
+    })->name('add-book');
+
+    // Find my books
+    Route::get('find-books',function(){
+        return view('findBooks');
+    })->name('find-book');
+});
 
 require __DIR__.'/auth.php';
