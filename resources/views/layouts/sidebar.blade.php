@@ -21,14 +21,16 @@
                 <a href="{{ route('dashboard') }}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
                         class="nav_logo-name">My Book Mate</span> </a>
                 <div class="nav_list">
-                    <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span
+                    <a href="{{ route('dashboard') }}" class="nav_link @if(Route::currentRouteName() == 'dashboard') active @endif"> <i class='bx bx-grid-alt nav_icon'></i> <span
                             class="nav_name">Dashboard</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-search nav_icon'></i> <span
-                            class="nav_name">Find books</span></a>
-                    <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span
+                    <a href="{{ route('my-inbox') }}" class="nav_link @if(Route::currentRouteName() == 'my-inbox') active @endif"> <i class='bx bx-folder nav_icon'></i> <span
                             class="nav_name">My Inbox</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">Users</span> </a>
+                    <a href="{{ route('add-book') }}" class="nav_link @if(Route::currentRouteName() == 'add-book') active @endif"> <i class='bx bx-book-add nav-icon'></i> <span
+                            class="nav_name">Add books</span></a>
+                    <a href="{{ route('find-book') }}" class="nav_link @if(Route::currentRouteName() == 'find-book') active @endif"> <i class='bx bx-search nav_icon'></i> <span
+                            class="nav_name">Find books</span></a>
+                    <a href="{{ route('profile') }}" class="nav_link @if(Route::currentRouteName() == 'profile') active @endif"> <i class='bx bx-user nav_icon'></i> <span
+                            class="nav_name">Profile</span> </a>
                     {{-- <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span
                             class="nav_name">Messages</span></a>
                     <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span
