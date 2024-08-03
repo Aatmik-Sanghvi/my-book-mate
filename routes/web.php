@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
 
     // Add my books
     Route::get('add-books',function(){
-        return view('addBooks');
+        return view('addBooks.addBooks');
     })->name('add-book');
 
     // Find my books
