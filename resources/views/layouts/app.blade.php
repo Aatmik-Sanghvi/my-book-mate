@@ -28,7 +28,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4QdyCtd3M8QfeAR4XEfcIrjHw-TRPlJI&loading=async&libraries=places&callback=initAutocomplete" ></script> --}}
+        <script async src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_api.api_key') }}&loading=async&libraries=places" async></script>
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     </head>
     <body class="font-sans antialiased">
