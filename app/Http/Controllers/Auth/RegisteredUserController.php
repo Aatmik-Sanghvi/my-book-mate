@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
 
         $data = $request->except(['_token']);
         $data['password'] = $password;
+        $data['is_active'] = 1;
         $user = User::create($data);
 
         event(new Registered($user));
