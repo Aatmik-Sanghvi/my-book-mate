@@ -4,25 +4,65 @@
         <div class="form-content">
             <div class="signup-form">
                 <div class="title">Signup</div>
-                <form action="{{ route('register-store') }}" method="POST">
+                <form action="{{ route('register-store') }}" method="POST" id="registerFrm">
                     @csrf
                     <div class="input-boxes">
-                        <div class="input-box">
+                        <div class="input-box name">
                             <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Enter your name" name="name">
+                            <input type="text" class="required" placeholder="Enter your name" name="name">
                         </div>
-                        <div class="input-box">
+                        @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <div class="input-box email">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" placeholder="Enter your email" name="email">
+                            <input type="text" class="required" placeholder="Enter your email" name="email">
                         </div>
-                        <div class="input-box">
+                        @error('email')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <div class="input-box phone_number">
                             <i class="fas fa-phone"></i>
-                            <input type="number" id="phone_number" name="phone_number" placeholder="Enter your phone number">
+                            <input type="number" class="required" id="phone_number" name="phone_number" placeholder="Enter your phone number">
                         </div>
-                        <div class="input-box">
+                        @error('phone_number')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <div class="input-box address">
                             <i class="fas fa-address-card"></i>
-                            <input type="address" id="address" name="address" placeholder="Enter your address">
+                            <input type="text" class="required" id="address" name="address" placeholder="Enter your address">
                         </div>
+                        @error('address')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <div class="input-box city">
+                            <i class="fas fa-city"></i>
+                            <input type="text" class="required" id="city" name="city" placeholder="Enter your city">
+                        </div>
+                        @error('city')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <div class="input-box state">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <input type="text" class="required" id="state" name="state" placeholder="Enter your state">
+                        </div>
+                        @error('state')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <div class="input-box country">
+                            <i class="fas fa-globe"></i>
+                            <input type="text" class="required" id="country" name="country" placeholder="Enter your country">
+                        </div>
+                        @error('country')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <div class="input-box postal_code">
+                            <i class="fas fa-envelope"></i>
+                            <input type="number" class="required" id="postal_code" name="postal_code" placeholder="Enter your postal code">
+                        </div>
+                        @error('postal_code')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         <div class="button input-box">
                             <input type="submit" value="Submit">
                         </div>
@@ -33,4 +73,7 @@
             </div>
         </div>
     </div>
+    @section('js')
+        <script src="{{ asset('assets/staticPart/js/auth.js') }}"></script>
+    @endsection
 @endsection

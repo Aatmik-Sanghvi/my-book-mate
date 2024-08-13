@@ -115,7 +115,7 @@ a {
     transition: .3s
 }
 
-.nav_link:hover {
+.nav_link:hover, .page_header_link:hover {
     color: var(--active-link)
 }
 
@@ -135,7 +135,11 @@ a {
     color: var(--active-link)
 }
 
-.active::before {
+.page_header_link.active{
+    color: var(--active-link)
+}
+
+.nav_link.active::before {
     content: '';
     position: absolute;
     left: 0;
@@ -212,6 +216,7 @@ a {
 .dataTables_length {
     float: left !important;
 }
+
 #myChart {
     display: block;
     margin: 0 auto; /* Centers the chart horizontally */

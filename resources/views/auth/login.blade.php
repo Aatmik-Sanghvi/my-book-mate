@@ -25,13 +25,15 @@
                                 Sign in with Google
                             </a>
                         </div>
-                        <div class="text sign-up-text">Don't have an account? <a href="{{ route('register') }}" class="auth-redirect-link">Signup
+                        <div class="text sign-up-text">Don't have an account? <a href="{{ route('register') }}"
+                                class="auth-redirect-link">Signup
                                 now</a></div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    @section('js')
     <script src="{{ asset('assets/staticPart/js/auth.js') }}"></script>
-    </div>
+    @stop
 @endsection

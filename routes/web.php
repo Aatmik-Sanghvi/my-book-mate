@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BooksController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('contact-us', function(){
     return view('contactUs');
@@ -32,25 +34,43 @@ Route::get('about-us',function(){
 
 
 Route::middleware('auth')->group(function () {
-    // User Profile
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // -------------------------------- Dashboard -----------------------------------------
+    Route::get('dashboard',[DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::post('dashboard/chart',[DashboardController::class, 'dashboardChart'])->name('dashboard-chart');
+    // ------------------------------------------------------------------------------------
 
-    // Inbox for the books
+    //--------------------------------- User Profile---------------------------------------
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //--------------------------------------------------------------------------------------
+    
+    
+    //-------------------------------Inbox for the books-------------------------------------
     Route::get('my-inbox',function(){
         return view('myInbox');
     })->name('my-inbox');
-
-    // Add my books
-    Route::get('add-books',function(){
-        return view('addBooks');
-    })->name('add-book');
-
-    // Find my books
+    //---------------------------------------------------------------------------------------
+    
+    
+    //------------------------------------ My books ------------------------------------------
+    Route::get('my-books',[BooksController::class, 'myBooks'])->name('my-books');
+    Route::post('my-books/ajax',[BooksController::class, 'myBooksAjax']);
+    Route::get('view-books/{id}',[BooksController::class, 'viewBooks'])->name('view-books');
+    Route::get('edit-books/{id}',[BooksController::class, 'editBooks'])->name('edit-books');
+    Route::post('update-books/{id}',[BooksController::class, 'updateBooks'])->name('update-books');
+    Route::post('delete-books/{id}',[BooksController::class, 'deleteBooks'])->name('delete-books');
+    Route::get('add-books', [BooksController::class, 'addBooks'])->name('add-books');
+    Route::post('store-books', [BooksController::class, 'storeBooks'])->name('store-books');
+    //-----------------------------------------------------------------------------------------
+    
+    //------------------------------------Find my books----------------------------------------
     Route::get('find-books',function(){
         return view('findBooks');
     })->name('find-book');
+    // ----------------------------------------------------------------------------------------
+
 });
 
 require __DIR__.'/auth.php';
