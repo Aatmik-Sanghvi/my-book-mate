@@ -73,4 +73,7 @@
             </div>
         </div>
     </div>
+    @section('js')
+        <script src="{{ asset('assets/staticPart/js/auth.js') }}"></script>
+    @endsection
 @endsection

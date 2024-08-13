@@ -1,6 +1,7 @@
 @extends('layouts.sidebar')
 @section('main-dashboard-component')
 <div class="container">
+    <h2 class="text-color">My Books</h2>
     <div class="text-end">
       <a href="{{ route('add-books') }}" class="btn btn-primary">Add books</a>
     </div>

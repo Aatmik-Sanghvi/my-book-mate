@@ -13,7 +13,6 @@
 <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('assets/js/moment.js') }}"></script>
 <script src="{{ asset('assets/js/common.js') }}"></script>
-<script src="{{ asset('assets/staticPart/js/auth.js') }}"></script>
 <script src="{{ asset('assets/dynamicPart/js/dashboard.js') }}"></script>
 
 <script>

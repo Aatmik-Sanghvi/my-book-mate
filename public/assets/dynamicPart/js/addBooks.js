@@ -1,13 +1,13 @@
 $(document).ready(function() {
 
-    // $('#frmAddBook').validate({
-    //     rules:{
-    //         title:{required:true},
-    //         authors:{required:true},
-    //         // isbn:{required:true},
-    //         'book_images[]':{required:true}
-    //     }
-    // });
+    $('#frmAddBook').validate({
+        rules:{
+            title:{required:true},
+            authors:{required:true},
+            // isbn:{required:true},
+            'book_images[]':{required:true}
+        }
+    });
 
     $('#search_books').autocomplete({
         source:function(request, response){

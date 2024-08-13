@@ -18,11 +18,14 @@ class GoogleAuthController extends Controller
     public function signin_google_callback(){
         try{
             $user = Socialite::driver('google')->user();
-            // dd($user->id);
-            $findUser = User::where('google_id',$user->id)->first();
+
+            $findUser = User::where('email',$user->email)->orWhere('google_id',$user->id)->first();
 
             if($findUser){
                 Auth::login($findUser);
+                if(is_null($findUser->address)){
+                    return redirect()->intended('profile')->with(['warning'=>'Please set your profile before procedding.']);
+                }
                 return redirect()->intended('dashboard');
             }else{
                 $newUser = User::create([
@@ -34,7 +37,11 @@ class GoogleAuthController extends Controller
                 ]);
 
                 Auth::login($newUser);
-                return redirect()->intended('dashboard');
+
+                if(is_null($newUser->address)){
+                    return redirect()->intended('profile')->with(['warning'=>'Please set your profile before procedding.']);
+                }
+                return redirect()->intended('dashboard')->with(['success'=>'Logged in successfully.']);
             }
         }catch(Exception $e){
             return $e;
