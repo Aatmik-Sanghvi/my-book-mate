@@ -76,8 +76,53 @@ class BooksController extends Controller
 
     // View book page
     public function viewBooks($id){
-        $viewBookPage = Books::find($id);
-        return view('myBooks.viewBooks',compact('viewBookPage'));
+        $book = Books::find($id);
+        return view('myBooks.viewBooks',compact('book'));
+    }
+
+    // Edit book page
+    public function editBooks($id){
+        $book = Books::find($id);
+        return view('myBooks.editBooks',compact('book'));
+    }
+
+    // Update book page
+    public function updateBooks(Request $request, $id){
+        $request->validate([
+            'title'=>'required',
+            'authors'=>'required',
+            'book_images.*'=>'image|mimes:jpeg,jpg,png|max:2048'
+        ],[
+            'book_images.*'=>'Image type or size is too large'
+        ]);
+
+        $user = Auth::user();
+        $storeBooks = Books::find($id)->update([
+            'user_id'=>$user->id,
+            'title'=>$request->title,
+            'authors'=>$request->authors,
+            'isbn'=>$request->isbn
+        ]);
+
+        if($request->hasFile('book_images')){
+            $findImageToDb = BookImages::where('books_id',$id)->get();
+            foreach($findImageToDb as $image){
+                if(file_exists(public_path('bookImages/' . $image->image_path))){
+                    unlink(public_path('bookImages/' . $image->image_path));
+                }
+            }
+            BookImages::where('books_id', $id)->delete();
+            foreach($request->file('book_images') as $file){
+                $imageName = time().'.'.$file->extension();
+                $file->move(public_path('bookImages'),$imageName);
+                \Log::info($imageName);
+                $updatingImageToDb = BookImages::create([
+                    'books_id'=>$id,
+                    'image_path'=>$imageName
+                ]);
+            }
+        }
+        return redirect()->route('view-books',['id'=>$id])->with(['success'=>'Books details updated successfully.']);
     }
     
     // Add book page
@@ -115,6 +160,10 @@ class BooksController extends Controller
             }
         }
 
-        return redirect()->route('my-books')->with(['success'=>'Book added successfully.']);
+        return redirect()->route('my-books')->with(['success'=>'Books added successfully.']);
+    }
+
+    public function deleteBooks($id){
+        
     }
 }

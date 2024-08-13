@@ -35,7 +35,7 @@ Route::get('about-us',function(){
 Route::middleware('auth')->group(function () {
     
     //--------------------------------- User Profile---------------------------------------
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //--------------------------------------------------------------------------------------
@@ -52,6 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::get('my-books',[BooksController::class, 'myBooks'])->name('my-books');
     Route::post('my-books/ajax',[BooksController::class, 'myBooksAjax']);
     Route::get('view-books/{id}',[BooksController::class, 'viewBooks'])->name('view-books');
+    Route::get('edit-books/{id}',[BooksController::class, 'editBooks'])->name('edit-books');
+    Route::post('update-books/{id}',[BooksController::class, 'updateBooks'])->name('update-books');
+    Route::post('delete-books/{id}',[BooksController::class, 'deleteBooks'])->name('delete-books');
     Route::get('add-books', [BooksController::class, 'addBooks'])->name('add-books');
     Route::post('store-books', [BooksController::class, 'storeBooks'])->name('store-books');
     //-----------------------------------------------------------------------------------------

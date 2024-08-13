@@ -34,9 +34,10 @@
                     <a href="{{ route('my-books') }}"
                         class="nav_link @if (Route::currentRouteName() == 'my-books' ||
                                 Route::currentRouteName() == 'view-books' ||
-                                Route::currentRouteName() == 'add-books') active @endif"> <i
+                                Route::currentRouteName() == 'add-books' || 
+                                Route::currentRouteName() == 'edit-books') active @endif"> <i
                             class='bx bx-folder nav_icon'></i> <span class="nav_name">My Books</span> </a>
-                    <a href="{{ route('profile') }}" class="nav_link @if (Route::currentRouteName() == 'profile') active @endif">
+                    <a href="{{ route('profile.edit') }}" class="nav_link @if (Route::currentRouteName() == 'profile.edit') active @endif">
                         <i class='bx bx-user nav_icon'></i> <span class="nav_name">Profile</span> </a>
                     {{-- <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span
                             class="nav_name">Messages</span></a>

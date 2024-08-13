@@ -10,7 +10,7 @@ $(document).ready(function(){
             headers:{
                 'X-CSRF-TOKEN':_token
             },
-            url:baseUrl+"myBooks/ajax",
+            url:baseUrl+"my-books/ajax",
         },
         order:[],
         columns:[
