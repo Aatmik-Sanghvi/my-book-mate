@@ -10,12 +10,17 @@
     <link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="{{ asset('assets/dynamicPart/css/dashboard.css') }}">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_api.api_key') }}&loading=async&libraries=places"></script>
 </head>
 
 <body id="body-pd" class="body-pd">
     <header class="header body-pd" id="header">
         <div class="header_toggle"> <i class='bx bx-menu bx-x' id="header-toggle"></i> </div>
-        <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
+        <div class="header_img"> <img src="https://wallpapers.com/images/hd/hulk-giga-chad-kitllbmowcod6hup.jpg" alt="no-image"> </div>
     </header>
     <div class="l-navbar show" id="nav-bar">
         <nav class="nav">
@@ -31,13 +36,13 @@
                             class='bx bx-search nav_icon'></i> <span class="nav_name">Borrowed books</span></a>
                     {{-- <a href="{{ route('add-book') }}" class="nav_link @if (Route::currentRouteName() == 'add-book') active @endif"> <i class='bx bx-book-add nav-icon'></i> <span
                             class="nav_name">Add books</span></a> --}}
-                    <a href="{{ route('my-books') }}"
-                        class="nav_link @if (Route::currentRouteName() == 'my-books' ||
-                                Route::currentRouteName() == 'view-books' ||
-                                Route::currentRouteName() == 'add-books' || 
-                                Route::currentRouteName() == 'edit-books') active @endif"> <i
-                            class='bx bx-folder nav_icon'></i> <span class="nav_name">My Books</span> </a>
-                    <a href="{{ route('profile.edit') }}" class="nav_link @if (Route::currentRouteName() == 'profile.edit') active @endif">
+                    <a href="{{ route('my-books') }}" class="nav_link @if (Route::currentRouteName() == 'my-books' ||
+                            Route::currentRouteName() == 'view-books' ||
+                            Route::currentRouteName() == 'add-books' ||
+                            Route::currentRouteName() == 'edit-books') active @endif">
+                        <i class='bx bx-folder nav_icon'></i> <span class="nav_name">My Books</span> </a>
+                    <a href="{{ route('profile.edit') }}"
+                        class="nav_link @if (Route::currentRouteName() == 'profile.edit') active @endif">
                         <i class='bx bx-user nav_icon'></i> <span class="nav_name">Profile</span> </a>
                     {{-- <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span
                             class="nav_name">Messages</span></a>
@@ -58,7 +63,7 @@
     </div>
     <!--Container Main start-->
     {{-- <div style="position:absolute;"> --}}
-        @yield('main-dashboard-component')
+    @yield('main-dashboard-component')
     {{-- </div> --}}
     <!--Container Main end-->
     @include('layouts.js')
