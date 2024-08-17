@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-lg nav-bg">
-    <a class="navbar-brand ms-2" href="/">My Book Mate</a>
+    <div style="margin-left:10px;">
+        <a href="/"><img src="{{ asset('assets/images/logo.png') }}" alt="logo" srcset="" width="80px" height="80px"></a>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
