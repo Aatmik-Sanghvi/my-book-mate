@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $.fn.dataTable.ext.errMode = "none";
+    console.log($('#data-table').data('page'));
     $('#data-table').DataTable({
         processing:true,
         serverSide:true,
@@ -11,6 +12,9 @@ $(document).ready(function(){
                 'X-CSRF-TOKEN':_token
             },
             url:baseUrl+"my-books/ajax",
+            data:{
+                'page':$('#data-table').data('page')
+            }
         },
         order:[],
         columns:[

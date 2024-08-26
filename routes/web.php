@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BorrorwedBooksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,14 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //--------------------------------------------------------------------------------------
     
-    
-    //-------------------------------Inbox for the books-------------------------------------
-    Route::get('my-inbox',function(){
-        return view('myInbox');
-    })->name('my-inbox');
-    //---------------------------------------------------------------------------------------
-    
-    
     //------------------------------------ My books ------------------------------------------
     Route::get('my-books',[BooksController::class, 'myBooks'])->name('my-books');
     Route::post('my-books/ajax',[BooksController::class, 'myBooksAjax']);
@@ -70,6 +63,11 @@ Route::middleware('auth')->group(function () {
         return view('findBooks');
     })->name('find-book');
     // ----------------------------------------------------------------------------------------
+
+    // -----------------------------------Borrowed Books---------------------------------------
+    Route::get('all-books',[BorrorwedBooksController::class, 'allBooks'])->name('all-books');
+    Route::get('borrow-books/{id}',[BorrorwedBooksController::class, 'borrowBooks'])->name('borrow-books');
+    Route::post('borrow-books/request-message',[BorrorwedBooksController::class, 'requestMessage'])->name('request-message');
 
 });
 

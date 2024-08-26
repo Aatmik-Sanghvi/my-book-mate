@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Books;
 use App\Models\BookImages;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class BooksController extends Controller
 {
@@ -29,7 +30,12 @@ class BooksController extends Controller
             $dir = $request->input('order.0.dir');
         }
 
-        $books = Books::where('user_id',Auth::user()->id);
+        $books;
+        if($request->page == 'my-books'){
+            $books = Books::where('user_id',Auth::user()->id);
+        }else if($request->page == 'borrowed-books'){
+            $books = Books::query();
+        }
 
         if(isset($request->search['value'])){
             $search = $request->search['value'];
@@ -53,10 +59,14 @@ class BooksController extends Controller
                 $nestedData['id'] = $item->id;
                 $nestedData['title'] = $item->title;
                 $nestedData['authors'] = $item->authors;
-                $nestedData['isbn'] = $item->isbn;
-                // $nestedData['images'] = $item->
+                $nestedData['isbn'] = $item->isbn ?? 'NA';
+                // $nestedData['images'] = '<img src="'.asset($item->bookimage_path).'" alt="book_image" width="100px" height="100px">';
                 $action = '<div class="text-center">';
+                if($request->page == 'borrowed-books'){
+                    $action .= '<a href="'.route('borrow-books',$item->id).'" class="btn btn-primary"><img src="'.asset('assets/images/booking.png').'" alt="book-id" width="20px" height="20px"></a>';
+                }
                 $action .= '<a href="'.route('view-books', $item->id).'" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>';
+                $action .= '<a href="'.route('edit-books', $item->id).'" class="btn btn-primary"><i class="fa-solid fa-pen"></i></a>';
                 $action .= '</div>';
                 $nestedData['action'] = $action;
 
