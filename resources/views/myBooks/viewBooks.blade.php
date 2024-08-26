@@ -29,7 +29,7 @@
                     <label for="book-image" class="text-color">Image</label>
                     <br>
                     @foreach ($book->bookImages as $item)
-                        <img src="{{ asset('bookImages/' . $item->image_path) }}" alt="book_image_{{ $item->id }}"
+                        <img src="{{ asset($item->image_path) }}" alt="book_image_{{ $item->id }}"
                             width="100px" height="100px">
                     @endforeach
                     {{-- <input class="form-control" type="file" name="book_images[]" id="book_images" multiple>

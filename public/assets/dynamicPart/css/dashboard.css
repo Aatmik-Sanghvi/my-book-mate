@@ -224,6 +224,15 @@ a {
     height: auto;
 }
 
+.pngToWhite{
+    filter: brightness(0) invert(1);
+}
+
+.pngToWhite:hover{
+    filter: none;
+    color:var(--active-link);
+}
+
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;

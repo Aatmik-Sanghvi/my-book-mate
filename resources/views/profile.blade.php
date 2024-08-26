@@ -17,7 +17,6 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group col-md-6 mt-2">
-                            {{-- <i class="fas fa-envelope"></i> --}}
                             <label for="email" class="text-color">Email</label>
                             <input type="text" class="form-control text-color required" placeholder="Enter your email" name="email" value="{{ $user->email }}">
                         </div>
@@ -25,7 +24,6 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group col-md-6 mt-2">
-                            {{-- <i class="fas fa-phone"></i> --}}
                             <label for="phone_number" class="text-color">Phone Number</label>
                             <input type="number" class="form-control text-color required" id="phone_number" name="phone_number" placeholder="Enter your phone number" value="{{ $user->phone_number }}">
                         </div>
@@ -33,7 +31,6 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group col-md-6 mt-2">
-                            {{-- <i class="fas fa-address-card"></i> --}}
                             <label for="address" class="text-color">Address</label>
                             <input type="text" class="form-control text-color required" id="address" name="address" placeholder="Enter your address" value="{{ $user->address }}">
                         </div>
@@ -41,7 +38,6 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group col-md-6 mt-2">
-                            {{-- <i class="fas fa-city"></i> --}}
                             <label for="city" class="text-color">City</label>
                             <input type="text" class="form-control text-color required" id="city" name="city" placeholder="Enter your city" value="{{ $user->city }}">
                         </div>
@@ -49,7 +45,6 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group col-md-6 mt-2">
-                            {{-- <i class="fas fa-map-marked-alt"></i> --}}
                             <label for="state" class="text-color">State</label>
                             <input type="text" class="form-control text-color required" id="state" name="state" placeholder="Enter your state" value="{{ $user->state }}">
                         </div>
@@ -64,13 +59,20 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group col-md-6 mt-2">
-                            {{-- <i class="fas fa-envelope"></i> --}}
                             <label for="postal_code" class="text-color">Postal Code</label>
                             <input type="number" class="form-control text-color required" id="postal_code" name="postal_code" placeholder="Enter your postal code" value="{{ $user->postal_code }}">
                         </div>
                         @error('postal_code')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
+                        {{-- <div class="form-group col-md-6 mt-2">
+                            <label for="profile_photo" class="text-color">Profile Photo</label>
+                            <img src="{{ asset('assets') }}" alt="">
+                            <input type="file" class="form-control text-color required" id="profile_photo" name="profile_photo">
+                        </div>
+                        @error('profile_photo')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror --}}
                         <div class="form-group mt-2">
                             {{-- <input type="submit" value="Submit"> --}}
                             <button class="btn btn-primary" type="submit">Save</button>

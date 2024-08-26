@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Book Mate</title>
+    <link rel="icon" href="{{ asset('assets/images/logo.png') }}">
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="{{ asset('assets/dynamicPart/css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,7 +23,7 @@
 <body id="body-pd" class="body-pd">
     <header class="header body-pd" id="header">
         <div class="header_toggle"> <i class='bx bx-menu bx-x' id="header-toggle"></i> </div>
-        <div class="header_img"> <img src="https://wallpapers.com/images/hd/hulk-giga-chad-kitllbmowcod6hup.jpg" alt="no-image"> </div>
+        <div class="header_img"> <a href="{{ route('profile.edit') }}"> <img src="https://wallpapers.com/images/hd/hulk-giga-chad-kitllbmowcod6hup.jpg" alt="no-image"> </a> </div>
     </header>
     <div class="l-navbar show" id="nav-bar">
         <nav class="nav">
@@ -32,8 +35,8 @@
                         <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
                     <a href="{{ route('find-book') }}" class="nav_link @if (Route::currentRouteName() == 'find-book') active @endif">
                         <i class='bx bx-search nav_icon'></i> <span class="nav_name">Find books</span></a>
-                    <a href="" class="nav_link @if (Route::currentRouteName() == 'borrowed-book') active @endif"> <i
-                            class='bx bx-search nav_icon'></i> <span class="nav_name">Borrowed books</span></a>
+                    <a href="{{ route('all-books') }}" class="nav_link @if (Route::currentRouteName() == 'all-books') active @endif"> 
+                        <img src="{{ asset('assets/images/bookshelf.png') }}" class="pngToWhite" alt="bookShelf" width="20px" height="20px"> <span class="nav_name">All books</span></a>
                     {{-- <a href="{{ route('add-book') }}" class="nav_link @if (Route::currentRouteName() == 'add-book') active @endif"> <i class='bx bx-book-add nav-icon'></i> <span
                             class="nav_name">Add books</span></a> --}}
                     <a href="{{ route('my-books') }}" class="nav_link @if (Route::currentRouteName() == 'my-books' ||

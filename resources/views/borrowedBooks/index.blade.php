@@ -1,13 +1,13 @@
 @extends('layouts.sidebar')
 @section('main-dashboard-component')
     <div class="container">
-        <h2 class="text-color">My Books</h2>
-        <div class="text-end">
+        <h2 class="text-color">All Books</h2>
+        {{-- <div class="text-end">
             <a href="{{ route('add-books') }}" class="btn btn-primary">Add books</a>
-        </div>
+        </div> --}}
         <br>
         <div class="container-fluid pb-4">
-            <table class="table display responsive nowrap data-table sp-table mb-0" id="data-table" style="width:100%" data-page="my-books">
+            <table class="table display responsive nowrap data-table sp-table mb-0" id="data-table" style="width:100%" data-page="borrowed-books">
                 <thead>
                     <tr>
                         <th class="text-color text-center">Book Id</th>
