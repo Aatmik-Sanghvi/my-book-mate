@@ -10,7 +10,7 @@
             <table class="table display responsive nowrap data-table sp-table mb-0" id="data-table" style="width:100%" data-page="borrowed-books">
                 <thead>
                     <tr>
-                        <th class="text-color text-center">Book Id</th>
+                        {{-- <th class="text-color text-center">Book Id</th> --}}
                         <th class="text-color text-center">Title</th>
                         <th class="text-color text-center">Authors</th>
                         <th class="text-color text-center">ISBN</th>

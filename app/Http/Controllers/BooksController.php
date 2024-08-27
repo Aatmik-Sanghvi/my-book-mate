@@ -7,18 +7,23 @@ use App\Models\Books;
 use App\Models\BookImages;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Crypt;
+
+// For fetching location based on ip address
+// use Stevebauman\Location\Facades\Location;
 
 class BooksController extends Controller
 {
     //Index Page
-    public function myBooks(){
+    public function myBooks(Request $request){
         return view('myBooks.indexBooks');
     }
 
     // Ajax function for listing
     public function myBooksAjax(Request $request){
         $columns = array('id','title','author','isbn');
-        
+        $city = !is_null($request->city) ? $request->city : Auth::user()->city;
+
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = "id";
@@ -34,14 +39,17 @@ class BooksController extends Controller
         if($request->page == 'my-books'){
             $books = Books::where('user_id',Auth::user()->id);
         }else if($request->page == 'borrowed-books'){
-            $books = Books::query();
+            $books = Books::whereHas('user', function($query) use ($city){
+                $query->where('city',$city);
+            });
         }
 
         if(isset($request->search['value'])){
             $search = $request->search['value'];
             $books = $books->where(function ($query) use ($search){
-                $query->where('id','LIKE',"%{$search}%")
-                    ->orWhere('title','LIKE',"%{$search}%")
+                $query
+                // where('id','LIKE',"%{$search}%")
+                    ->where('title','LIKE',"%{$search}%")
                     ->orWhere('authors','LIKE',"%{$search}%")
                     ->orWhere('isbn','LIKE',"%{$search}%");
             });
@@ -56,17 +64,17 @@ class BooksController extends Controller
 
         if(!empty($books)){
             foreach($books as $item){
-                $nestedData['id'] = $item->id;
+                // $nestedData['id'] = $item->id;
                 $nestedData['title'] = $item->title;
                 $nestedData['authors'] = $item->authors;
                 $nestedData['isbn'] = $item->isbn ?? 'NA';
                 // $nestedData['images'] = '<img src="'.asset($item->bookimage_path).'" alt="book_image" width="100px" height="100px">';
                 $action = '<div class="text-center">';
                 if($request->page == 'borrowed-books'){
-                    $action .= '<a href="'.route('borrow-books',$item->id).'" class="btn btn-primary"><img src="'.asset('assets/images/booking.png').'" alt="book-id" width="20px" height="20px"></a>';
+                    $action .= '<a href="'.route('borrow-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><img src="'.asset('assets/images/booking.png').'" alt="book-id" width="20px" height="20px"></a>';
                 }
-                $action .= '<a href="'.route('view-books', $item->id).'" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>';
-                $action .= '<a href="'.route('edit-books', $item->id).'" class="btn btn-primary"><i class="fa-solid fa-pen"></i></a>';
+                $action .= '<a href="'.route('view-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>';
+                $action .= '<a href="'.route('edit-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><i class="fa-solid fa-pen"></i></a>';
                 $action .= '</div>';
                 $nestedData['action'] = $action;
 
@@ -86,13 +94,13 @@ class BooksController extends Controller
 
     // View book page
     public function viewBooks($id){
-        $book = Books::find($id);
+        $book = Books::find(Crypt::decrypt($id));
         return view('myBooks.viewBooks',compact('book'));
     }
 
     // Edit book page
     public function editBooks($id){
-        $book = Books::find($id);
+        $book = Books::find(Crypt::decrypt($id));
         return view('myBooks.editBooks',compact('book'));
     }
 
