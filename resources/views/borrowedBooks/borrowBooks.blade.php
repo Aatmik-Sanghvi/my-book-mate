@@ -3,7 +3,7 @@
     <div class="container align-item-center mt-2">
         <h3 class="text-color">
             <a href="{{ route('all-books') }}" class="text-color page_header_link">All Books</a>
-            < <a href="{{ route('borrow-books', ['id' => $book->id]) }}"
+            < <a href="{{ route('borrow-books', ['id' => Crypt::encrypt($book->id) ]) }}"
                 class="text-color page_header_link @if (Route::currentRouteName() == 'borrow-books') active @endif">Borrow book</a>
         </h3>
         <hr class="text-color">

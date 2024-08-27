@@ -8,6 +8,7 @@ use App\Models\BorrowedBookHistory;
 use Illuminate\Support\Facades\Auth;
 use Mail;
 use App\Mail\RequestBookMail;
+use Illuminate\Support\Facades\Crypt;
 
 
 class BorrorwedBooksController extends Controller
@@ -18,7 +19,7 @@ class BorrorwedBooksController extends Controller
     }
 
     public function borrowBooks($id){
-        $book = Books::find($id);
+        $book = Books::find(Crypt::decrypt($id));
         return view('borrowedBooks.borrowBooks',compact('book'));
     }
 

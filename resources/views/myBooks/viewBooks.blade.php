@@ -3,12 +3,12 @@
     <div class="container align-item-center mt-2">
         <h3 class="text-color">
             <a href="{{ route('my-books') }}" class="text-color page_header_link">My Books</a>
-            < <a href="{{ route('view-books', ['id' => $book->id]) }}"
+            < <a href="{{ route('view-books', ['id' => Crypt::encrypt($book->id) ]) }}"
                 class="text-color page_header_link @if (Route::currentRouteName() == 'view-books') active @endif">View book</a>
         </h3>
         <hr class="text-color">
         <div class="text-end">
-            <a href="{{ route('edit-books', ['id' => $book->id]) }}" class="btn btn-primary">Edit books</a>
+            <a href="{{ route('edit-books', ['id' => Crypt::encrypt($book->id)]) }}" class="btn btn-primary">Edit books</a>
         </div>
         <div class="card mt-3">
             <div class="card-body">

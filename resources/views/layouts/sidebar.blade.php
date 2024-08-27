@@ -11,8 +11,9 @@
     <link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="{{ asset('assets/dynamicPart/css/dashboard.css') }}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.responsive.datatable.css') }}">
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -33,8 +34,8 @@
                 <div class="nav_list">
                     <a href="{{ route('dashboard') }}" class="nav_link @if (Route::currentRouteName() == 'dashboard') active @endif">
                         <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
-                    <a href="{{ route('find-book') }}" class="nav_link @if (Route::currentRouteName() == 'find-book') active @endif">
-                        <i class='bx bx-search nav_icon'></i> <span class="nav_name">Find books</span></a>
+                    {{-- <a href="{{ route('find-book') }}" class="nav_link @if (Route::currentRouteName() == 'find-book') active @endif">
+                        <i class='bx bx-search nav_icon'></i> <span class="nav_name">Find books</span></a> --}}
                     <a href="{{ route('all-books') }}" class="nav_link @if (Route::currentRouteName() == 'all-books') active @endif"> 
                         <img src="{{ asset('assets/images/bookshelf.png') }}" class="pngToWhite" alt="bookShelf" width="20px" height="20px"> <span class="nav_name">All books</span></a>
                     {{-- <a href="{{ route('add-book') }}" class="nav_link @if (Route::currentRouteName() == 'add-book') active @endif"> <i class='bx bx-book-add nav-icon'></i> <span
@@ -76,6 +77,8 @@
         toastr.error("{{ Session::get('error') }}");
     @elseif (Session::has('success'))
         toastr.success("{{ Session::get('success') }}");
+    @elseif (Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}");
     @endif
 </script>
 

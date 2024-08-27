@@ -481,10 +481,10 @@
                                                                             <tr style="vertical-align: top">
                                                                                 <td align="left" valign="middle"
                                                                                     style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
-                                                                                    <a href="https://www.facebook.com/unlayer"
+                                                                                    <a href="#"
                                                                                         title="Facebook"
                                                                                         target="_blank">
-                                                                                        <img src="{{ asset('assets/images/image-1.png') }}"
+                                                                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMNEHYAYZ2SCOgcjzZ10vlGzoeDPkMPLwZJ4zkrbUA1oGqmAayt6mDLOkJQjDkfa5L68E&usqp=CAU"
                                                                                             alt="Facebook"
                                                                                             title="Facebook"
                                                                                             width="32"
@@ -505,10 +505,10 @@
                                                                             <tr style="vertical-align: top">
                                                                                 <td align="left" valign="middle"
                                                                                     style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
-                                                                                    <a href="https://twitter.com/unlayerapp"
+                                                                                    <a href="#"
                                                                                         title="Twitter"
                                                                                         target="_blank">
-                                                                                        <img src="{{ asset('assets/images/image-2.png') }}"
+                                                                                        <img src="https://i.pinimg.com/originals/69/a6/2a/69a62a5edc08d755dd8a4ef017e14c63.jpg"
                                                                                             alt="Twitter"
                                                                                             title="Twitter"
                                                                                             width="32"
@@ -529,7 +529,7 @@
                                                                             <tr style="vertical-align: top">
                                                                                 <td align="left" valign="middle"
                                                                                     style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
-                                                                                    <a href="https://www.linkedin.com/company/unlayer/mycompany/"
+                                                                                    <a href="#"
                                                                                         title="LinkedIn"
                                                                                         target="_blank">
                                                                                         <img src="{{ asset('assets/images/image-4.png') }}"
@@ -556,7 +556,7 @@
                                                                                     <a href="https://www.instagram.com/unlayer_official/"
                                                                                         title="Instagram"
                                                                                         target="_blank">
-                                                                                        <img src="{{ asset('assets/images/image-3.png') }}"
+                                                                                        <img src="https://as2.ftcdn.net/v2/jpg/02/98/31/59/1000_F_298315933_FdK3b8wCs7EhYWlJqieSvmSgTOr9MSfR.jpg"
                                                                                             alt="Instagram"
                                                                                             title="Instagram"
                                                                                             width="32"
