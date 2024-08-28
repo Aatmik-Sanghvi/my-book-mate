@@ -39,7 +39,7 @@ class BooksController extends Controller
         if($request->page == 'my-books'){
             $books = Books::where('user_id',Auth::user()->id);
         }else if($request->page == 'borrowed-books'){
-            $books = Books::whereHas('user', function($query) use ($city){
+            $books = Books::where('user_id','!=',Auth::user()->id)->whereHas('user', function($query) use ($city){
                 $query->where('city',$city);
             });
         }
