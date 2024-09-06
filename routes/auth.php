@@ -13,10 +13,12 @@ use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store'])->name('register-store');
+    // ------------------------------DELETED ROUTE---------------------------------------------
+    // Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+
+    // Route::post('register', [RegisteredUserController::class, 'store'])->name('register-store');
+    // ----------------------------------------------------------------------------------------
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
