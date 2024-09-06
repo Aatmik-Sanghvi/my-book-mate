@@ -22,7 +22,8 @@ class BooksController extends Controller
     // Ajax function for listing
     public function myBooksAjax(Request $request){
         $columns = array('id','title','author','isbn');
-        $city = !is_null($request->city) ? $request->city : Auth::user()->city;
+        // $city = !is_null($request->city) ? $request->city : Auth::user()->city;
+        $city = Auth::user()->city;
 
         $limit = $request->input('length');
         $start = $request->input('start');
@@ -36,9 +37,12 @@ class BooksController extends Controller
         }
 
         $books;
+        // IF condition is for getting all the books user have added.
         if($request->page == 'my-books'){
             $books = Books::where('user_id',Auth::user()->id);
-        }else if($request->page == 'borrowed-books'){
+        }
+        // else condition is for getting the list of books that are present in the user city.
+        else if($request->page == 'borrowed-books'){
             $books = Books::where('user_id','!=',Auth::user()->id)->whereHas('user', function($query) use ($city){
                 $query->where('city',$city);
             });
