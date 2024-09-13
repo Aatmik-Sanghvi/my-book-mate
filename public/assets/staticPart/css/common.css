@@ -89,11 +89,11 @@ html {
     font-weight: 700;
 }
 
-.nav-item:hover a{
+/* .nav-item:hover a{
     background-color: #006989;
     border-radius: 3px;
     color: white;
-}
+} */
 
 .nav-link.inThatPage {
     background-color: #006989;
