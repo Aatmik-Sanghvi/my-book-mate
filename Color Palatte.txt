@@ -1,0 +1,12 @@
+#B380FF - 10%
+#7AF0FF - 90%
+
+
+#E0D6DE - Text
+
+
+Font
+
+Heading - Sora
+
+Body - Noto Sans TC
