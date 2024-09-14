@@ -662,11 +662,11 @@
                                             <h4 class="title">Resources</h4>
                                         </div>
                                         <ul class="link">
-                                            <li><a href="javascript:void(0)">Home</a></li>
-                                            <li><a href="javascript:void(0)">Page</a></li>
-                                            <li><a href="javascript:void(0)">Portfolio</a></li>
-                                            <li><a href="javascript:void(0)">Blog</a></li>
-                                            <li><a href="javascript:void(0)">Contact</a></li>
+                                            <li><a href="#home">Home</a></li>
+                                            <li><a href="#features">Features</a></li>
+                                            <li><a href="#about">About</a></li>
+                                            <li><a href="#why">Why</a></li>
+                                            {{-- <li><a href="{{ route('login') }}">Login</a></li> --}}
                                         </ul>
                                     </div>
                                     <!-- footer wrapper -->
@@ -680,12 +680,11 @@
                                         <h4 class="title">Contact Us</h4>
                                     </div>
                                     <ul class="contact">
-                                        <li>+91 7405294376</li>
-                                        <li>info@gmail.com</li>
-                                        <li>www.mybookmate.com</li>
+                                        {{-- <li>+91 7405294376</li> --}}
+                                        <li>info.mybookmate@gmail.com</li>
+                                        <li>www.mybookmate.in</li>
                                         <li>
-                                            123 Stree New York City , United <br />
-                                            States Of America 750.
+                                            Ahmedabad, India.
                                         </li>
                                     </ul>
                                 </div>
