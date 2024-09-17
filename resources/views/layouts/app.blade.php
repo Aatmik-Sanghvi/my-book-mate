@@ -15,7 +15,8 @@
         rel="stylesheet">
 
     <link rel="icon" href="{{ asset('assets/images/logo.png') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/jquery-impromptu.css') }}" rel="stylesheet">
@@ -44,7 +45,10 @@
     <!-- Scripts -->
     <script
         src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_api.api_key') }}&loading=async&libraries=places"
-        async></script>
+        async>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
 
