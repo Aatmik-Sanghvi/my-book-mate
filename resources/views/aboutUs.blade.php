@@ -46,10 +46,19 @@
                 <li class="list-group-item"><b>Community-Driven:</b> We are more than just a platform; we are a
                     community of
                     book lovers who believe in the power of sharing.</li>
-                <li class="list-group-item"><b>Free of Cost:</b> All book exchanges on My Book Mate are free. We believe
+                <li class="list-group-item"><b>Peer-to-peer book sharing:</b> It allows people to share their personal book
+                    collections with others for free, fostering a sense of community among book lovers.</li>
+                <li class="list-group-item"><b>Local-based exchanges:</b>The platform is localized, meaning users can find
+                    books shared by others in their city, making the process convenient and personal.</li>
+                <li class="list-group-item"><b>Sustainable model:</b>The platform promotes sustainability by encouraging
+                    book reuse, reducing waste, and limiting the need for constant new purchases.</li>
+                <li class="list-group-item"><b>Referral-based growth:</b>The platform leverages a referral system,
+                    incentivizing users to invite friends and family to expand the book-sharing community in their city,
+                    while also offering rewards to make participation more attractive.</li>
+                {{-- <li class="list-group-item"><b>Free of Cost:</b> All book exchanges on My Book Mate are free. We believe
                     that
-                    access to books and knowledge should not come with a price tag.</li>
-                <li class="list-group-item"><b>Local Focus:</b> </li>
+                    access to books and knowledge should not come with a price tag.</li> --}}
+                {{-- <li class="list-group-item"><b>Local Focus:</b> </li> --}}
             </ul>
 
             <h3>Join Us Today!</h3>

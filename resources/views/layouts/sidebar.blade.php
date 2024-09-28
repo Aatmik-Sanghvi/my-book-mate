@@ -53,14 +53,16 @@
                     {{-- <a href="{{ route('find-book') }}" class="nav_link @if (Route::currentRouteName() == 'find-book') active @endif">
                         <i class='bx bx-search nav_icon'></i> <span class="nav_name">Find books</span></a> --}}
                     <a href="{{ route('all-books') }}" class="nav_link @if (Route::currentRouteName() == 'all-books') active @endif"> 
-                        <img src="{{ asset('assets/images/bookshelf.png') }}" class="pngToWhite" alt="bookShelf" width="20px" height="20px"> <span class="nav_name">All books</span></a>
+                        {{-- <img src="{{ asset('assets/images/bookshelf.png') }}" class="pngToWhite" alt="bookShelf" width="20px" height="20px">  --}}
+                        <i class="fa-solid fa-table-list"></i>
+                        <span class="nav_name">All books</span></a>
                     {{-- <a href="{{ route('add-book') }}" class="nav_link @if (Route::currentRouteName() == 'add-book') active @endif"> <i class='bx bx-book-add nav-icon'></i> <span
                             class="nav_name">Add books</span></a> --}}
                     <a href="{{ route('my-books') }}" class="nav_link @if (Route::currentRouteName() == 'my-books' ||
                             Route::currentRouteName() == 'view-books' ||
                             Route::currentRouteName() == 'add-books' ||
                             Route::currentRouteName() == 'edit-books') active @endif">
-                        <i class='bx bx-folder nav_icon'></i> <span class="nav_name">My Books</span> </a>
+                        <i class="fa-solid fa-book"></i> <span class="nav_name">My Books</span> </a>
                     <a href="{{ route('profile.edit') }}"
                         class="nav_link @if (Route::currentRouteName() == 'profile.edit') active @endif">
                         <i class='bx bx-user nav_icon'></i> <span class="nav_name">Profile</span> </a>

@@ -25,9 +25,11 @@
                                 Sign in with Google
                             </a>
                         </div>
-                        <div class="text sign-up-text">Don't have an account? <a href="{{ route('register') }}"
+                        {{-- --------------------------------------REGISTER IS DELETED---------------------------- --}}
+                        {{-- <div class="text sign-up-text">Don't have an account? <a href="{{ route('register') }}"
                                 class="auth-redirect-link">Signup
-                                now</a></div>
+                                now</a></div> --}}
+                        {{-- -------------------------------------------------------------------------------------- --}}
                     </div>
                 </form>
             </div>
