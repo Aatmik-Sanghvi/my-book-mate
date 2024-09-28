@@ -1,0 +1,101 @@
+/* 
+    #E88D67 - orange
+    #F3F7EC - white
+    #006989 - light blue
+    #005C78 - dark compare to light blue
+*/
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 48px;
+    font-style: normal;
+    /* overflow: hidden; */
+}
+
+/* #about-us-root-div{
+    height: 100%; 
+    overflow-y: scroll;
+} */
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #F3F7EC;
+    /* background: url('https://images.unsplash.com/photo-1484415063229-3d6335668531?q=80&w=1514&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
+    background-size: cover; */
+    filter: blur(10px);
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    margin: 40px;
+    background: #006989;
+    padding: 20px;
+    border-radius: 8px;
+    color: #F3F7EC;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+#about-us-root-div::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.content h3 {
+    margin-top: 0;
+}
+
+.list-group {
+    padding-left: 0;
+    list-style: none;
+}
+
+.list-group-item {
+    margin-bottom: 10px;
+    background-color: transparent;
+    border: none;
+    color: #F3F7EC;
+}
+
+.nav-bg{
+    background-color: #E88D67;
+    color: #F3F7EC;
+}
+
+.navbar-brand{
+    color: #F3F7EC;
+    font-weight: 700;
+}
+
+.navbar-brand:hover {
+    color: #F3F7EC; /* Ensure color remains the same on hover */
+}
+
+.nav-item{
+    margin-left: 2px;
+}
+
+.nav-item a{
+    color: #F3F7EC;
+    font-weight: 700;
+}
+
+/* .nav-item:hover a{
+    background-color: #006989;
+    border-radius: 3px;
+    color: white;
+} */
+
+.nav-link.inThatPage {
+    background-color: #006989;
+    color: #F3F7EC;
+}

@@ -35,14 +35,9 @@
                         </div>
                         <div class="form-group col-md-6 mt-2">
                             <label for="book-image" class="text-color">Image</label>
-                            @foreach ($book->bookImages as $item)
-                                <img src="{{ asset($item->image_path) }}" alt="book_image_{{ $item->id }}"
-                                    width="100px" height="100px">
-                            @endforeach
-                            <input class="form-control" type="file" name="book_images[]" id="book_images" accept="images.*" multiple>
-                            @error('book_images.*')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            <br>
+                            <img src="{{ asset($book->image) }}" alt="No image"
+                                width="100px" height="100px">
                         </div>
                         <div class="form-group mt-2">
                             <a href="{{ route('my-books') }}" class="btn btn-primary">Cancel</a>

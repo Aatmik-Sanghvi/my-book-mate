@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('assets/staticPart/css/auth.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/auth.css') }}">
     <div class="container">
         <div class="cover">
             @if (Route::currentRouteName() == 'login')

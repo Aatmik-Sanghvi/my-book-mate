@@ -16,7 +16,9 @@ class Books extends Model
         'user_id',
         'title',
         'authors',
-        'isbn'
+        'isbn',
+        'category',
+        'image'
     ];
 
     public function bookImages(){

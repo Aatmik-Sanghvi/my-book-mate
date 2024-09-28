@@ -34,6 +34,6 @@
         </div>
     </div>
     @section('js')
-    <script src="{{ asset('assets/staticPart/js/auth.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/auth.js') }}"></script>
     @stop
 @endsection

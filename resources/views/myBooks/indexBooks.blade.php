@@ -7,14 +7,16 @@
         </div>
         <br>
         <div class="container-fluid pb-4">
-            <table class="table display responsive nowrap data-table sp-table mb-0" id="data-table" style="width:100%" data-page="my-books">
+            <table class="table display responsive nowrap data-table sp-table mb-0" id="data-table" style="width:100%"
+                data-page="my-books">
                 <thead>
                     <tr>
                         {{-- <th class="text-color text-center">Book Id</th> --}}
                         <th class="text-color text-center">Title</th>
                         <th class="text-color text-center">Authors</th>
                         <th class="text-color text-center">ISBN</th>
-                        {{-- <th class="text-color text-center">Images</th> --}}
+                        <th class="text-color text-center">Category</th>
+                        <th class="text-color text-center">Images</th>
                         <th class="text-color text-center" style="width: 150px;text-align: right;">Action</th>
                     </tr>
                 </thead>
@@ -24,6 +26,6 @@
         </div>
     </div>
 @section('js')
-    <script src="{{ asset('assets/dynamicPart/js/books.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/books.js') }}"></script>
 @stop
 @endsection

@@ -9,18 +9,19 @@ use Illuminate\Support\Facades\Auth;
 use Mail;
 use App\Mail\RequestBookMail;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Http;
 
 
-class BorrorwedBooksController extends Controller
+class AllBooksController extends Controller
 {
     //
     public function allBooks(){
-        return view('borrowedBooks.index');
+         return view('allBooks.index');
     }
 
-    public function borrowBooks($id){
+    public function requestBooks($id){
         $book = Books::find(Crypt::decrypt($id));
-        return view('borrowedBooks.borrowBooks',compact('book'));
+        return view('allBooks.requestBooks',compact('book'));
     }
 
     public function requestMessage(Request $request){

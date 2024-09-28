@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\BorrorwedBooksController;
+use App\Http\Controllers\AllBooksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
         Route::post('my-books/ajax',[BooksController::class, 'myBooksAjax']);
         Route::get('view-books/{id}',[BooksController::class, 'viewBooks'])->name('view-books');
         Route::get('edit-books/{id}',[BooksController::class, 'editBooks'])->name('edit-books');
+        Route::get('deleteImage/{id}',[BooksController::class, 'deleteImage'])->name('deleteImage');
         Route::post('update-books/{id}',[BooksController::class, 'updateBooks'])->name('update-books');
         Route::post('delete-books/{id}',[BooksController::class, 'deleteBooks'])->name('delete-books');
         Route::get('add-books', [BooksController::class, 'addBooks'])->name('add-books');
@@ -54,9 +55,9 @@ Route::middleware('auth')->group(function () {
         //-----------------------------------------------------------------------------------------
 
         // -----------------------------------Borrowed Books---------------------------------------
-        Route::get('all-books',[BorrorwedBooksController::class, 'allBooks'])->name('all-books');
-        Route::get('borrow-books/{id}',[BorrorwedBooksController::class, 'borrowBooks'])->name('borrow-books');
-        Route::post('borrow-books/request-message',[BorrorwedBooksController::class, 'requestMessage'])->name('request-message');
+        Route::get('all-books',[AllBooksController::class, 'allBooks'])->name('all-books');
+        Route::get('borrow-books/{id}',[AllBooksController::class, 'requestBooks'])->name('borrow-books');
+        Route::post('borrow-books/request-message',[AllBooksController::class, 'requestMessage'])->name('request-message');
         // ----------------------------------------------------------------------------------------
     });
 
