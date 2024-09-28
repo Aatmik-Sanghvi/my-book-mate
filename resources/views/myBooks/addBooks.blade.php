@@ -3,7 +3,9 @@
 @section('main-dashboard-component')
     <div class="container align-item-center my-2">
         <h3 class="text-color">
-        <a href="{{ route('my-books') }}" class="text-color page_header_link">My Books</a> < <a href="{{ route('add-books') }}" class="text-color page_header_link @if(Route::currentRouteName() == 'add-books') active @endif">Add book</a>
+            <a href="{{ route('my-books') }}" class="text-color page_header_link">My Books</a>
+            < <a href="{{ route('add-books') }}"
+                class="text-color page_header_link @if (Route::currentRouteName() == 'add-books') active @endif">Add book</a>
         </h3>
         <hr class="text-color">
         <div class="my-2">
@@ -16,8 +18,8 @@
             </div>
         </div>
         <hr class="text-color">
-        <h2 class="text-center text-color">OR</h2>
-        <hr class="text-color">
+        {{-- <h2 class="text-center text-color">OR</h2>
+        <hr class="text-color"> --}}
         <div class="card">
             <div class="card-body">
                 <form action="{{ route('store-books') }}" id="frmAddBook" method="post" enctype="multipart/form-data">
@@ -45,11 +47,16 @@
                                 placeholder="enter isbn number">
                         </div>
                         <div class="form-group col-md-6 mt-2">
+                            <label for="category" class="text-color">Category</label>
+                            <input class="form-control text-color" type="text" name="category" id="category"
+                                placeholder="enter category">
+                        </div>
+                        <div class="form-group col-md-6 mt-2" id="imageSection" hidden>
                             <label for="book-image" class="text-color">Image</label>
-                            <input class="form-control" type="file" name="book_images[]" id="book_images" multiple>
-                            @error('book_images.*')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            <br>
+                            <img src="" alt="book-image" id="image" name="image" width="100px" height="100px"
+                                hidden>
+                            <input type="text" name="book_image" id="book_image" hidden>
                         </div>
                         <div class="form-group mt-2">
                             <button class="btn btn-primary" type="submit">Save</button>
@@ -59,7 +66,7 @@
             </div>
         </div>
     </div>
-    @section('js')
-    <script src="{{ asset('assets/dynamicPart/js/addBooks.js') }}"></script>
-    @stop
+@section('js')
+    <script src="{{ asset('assets/backend/js/addBooks.js') }}"></script>
+@stop
 @endsection

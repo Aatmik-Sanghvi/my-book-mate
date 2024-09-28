@@ -46,16 +46,18 @@ class BooksController extends Controller
             $books = Books::where('user_id','!=',Auth::user()->id)->whereHas('user', function($query) use ($city){
                 $query->where('city',$city);
             });
+            \Log::info($request->category);
         }
 
-        if(isset($request->search['value'])){
-            $search = $request->search['value'];
+        $isAnyBookPresent = $books->count();
+        if(isset($request->search['value']) || isset($request->category)){
+            $search = $request->search['value'] ? $request->search['value'] : $request->category;
             $books = $books->where(function ($query) use ($search){
                 $query
-                // where('id','LIKE',"%{$search}%")
                     ->where('title','LIKE',"%{$search}%")
                     ->orWhere('authors','LIKE',"%{$search}%")
-                    ->orWhere('isbn','LIKE',"%{$search}%");
+                    ->orWhere('isbn','LIKE',"%{$search}%")
+                    ->orwhere('category','LIKE',"%{$search}%");
             });
         }
 
@@ -72,13 +74,16 @@ class BooksController extends Controller
                 $nestedData['title'] = $item->title;
                 $nestedData['authors'] = $item->authors;
                 $nestedData['isbn'] = $item->isbn ?? 'NA';
-                // $nestedData['images'] = '<img src="'.asset($item->bookimage_path).'" alt="book_image" width="100px" height="100px">';
+                $nestedData['category'] = ucfirst($item->category) ?? 'NA';
+                $nestedData['images'] = isset($item->image) ? '<img src="'.asset($item->image).'" alt="book_image" width="100px" height="100px">' : 'No image available';
                 $action = '<div class="text-center">';
                 if($request->page == 'borrowed-books'){
                     $action .= '<a href="'.route('borrow-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><img src="'.asset('assets/images/booking.png').'" alt="book-id" width="20px" height="20px"></a>';
                 }
-                $action .= '<a href="'.route('view-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>';
-                $action .= '<a href="'.route('edit-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><i class="fa-solid fa-pen"></i></a>';
+                if($request->page == 'my-books'){
+                    $action .= '<a href="'.route('view-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>';
+                }
+                // $action .= '<a href="'.route('edit-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><i class="fa-solid fa-pen"></i></a>';
                 $action .= '</div>';
                 $nestedData['action'] = $action;
 
@@ -89,6 +94,7 @@ class BooksController extends Controller
         $json_data = array(
             "draw" => intval($request->input('draw')),
             "recordsTotal" => intval($total_data),
+            "isAnyBookPresent" => $isAnyBookPresent,
             "recordsFiltered" => intval($total_filter),
             "data" => $data
         );
@@ -113,38 +119,40 @@ class BooksController extends Controller
         $request->validate([
             'title'=>'required',
             'authors'=>'required',
-            'book_images.*'=>'image|mimes:jpeg,jpg,png|max:2048'
+            'book_image'=>'image|mimes:jpeg,jpg,png|max:2048'
         ],[
-            'book_images.*'=>'Image type or size is too large'
+            'book_image'=>'Image type or size is too large'
         ]);
 
         $user = Auth::user();
+        $id = Crypt::decrypt($id);
         $storeBooks = Books::find($id)->update([
             'user_id'=>$user->id,
             'title'=>$request->title,
             'authors'=>$request->authors,
-            'isbn'=>$request->isbn
+            'isbn'=>$request->isbn 
         ]);
 
-        if($request->hasFile('book_images')){
-            $findImageToDb = BookImages::where('books_id',$id)->get();
-            foreach($findImageToDb as $image){
-                if(file_exists(public_path('bookImages/' . $image->image_path))){
-                    unlink(public_path('bookImages/' . $image->image_path));
-                }
-            }
-            BookImages::where('books_id', $id)->delete();
-            foreach($request->file('book_images') as $file){
-                $imageName = time().'.'.$file->extension();
-                $file->move(public_path('bookImages'),$imageName);
+        if($request->hasFile('book_image')){
+            // $findImageToDb = BookImages::where('books_id',$id)->first();
+        
+        //     foreach($findImageToDb as $image){
+                // if(file_exists(public_path('bookImages/' . $findImageToDb->image_path))){
+                //     unlink(public_path('bookImages/' . $findImageToDb->image_path));
+                // }
+        //     }
+            // BookImages::where('books_id', $id)->delete();
+            // foreach($request->file('book_images') as $file){
+                $imageName = time().'.'.$request->file('book_image')->extension();
+                $request->file('book_image')->move(public_path('bookImages'),$imageName);
                 \Log::info($imageName);
                 $updatingImageToDb = BookImages::create([
                     'books_id'=>$id,
-                    'image_path'=>$imageName
+                    'image_path'=>'bookImages/'.$imageName
                 ]);
-            }
+            // }
         }
-        return redirect()->route('view-books',['id'=>$id])->with(['success'=>'Books details updated successfully.']);
+        return redirect()->route('view-books',['id'=>Crypt::encrypt($id)])->with(['success'=>'Books details updated successfully.']);
     }
     
     // Add book page
@@ -157,9 +165,6 @@ class BooksController extends Controller
         $request->validate([
             'title'=>'required',
             'authors'=>'required',
-            'book_images.*'=>'image|mimes:jpeg,jpg,png|max:2048'
-        ],[
-            'book_images.*'=>'Image type or size is too large'
         ]);
 
         $user = Auth::user();
@@ -167,25 +172,33 @@ class BooksController extends Controller
             'user_id'=>$user->id,
             'title'=>$request->title,
             'authors'=>$request->authors,
-            'isbn'=>$request->isbn
+            'category'=>strtolower($request->category),
+            'isbn'=>$request->isbn,
+            'image'=>$request->book_image
         ]);
 
-        if($request->hasFile('book_images')){
-            foreach($request->file('book_images') as $file){
-                $imageName = time().'.'.$file->extension();
-                $file->move(public_path('bookImages'),$imageName);
-                \Log::info($imageName);
-                $addImageToDb = BookImages::create([
-                    'books_id'=>$storeBooks->id,
-                    'image_path'=>'bookImages/'.$imageName
-                ]);
-            }
-        }
+        // if($request->hasFile('book_image_src')){
+            // foreach($request->file('book_images') as $file){
+                // $imageName = time().'.'.$request->file('book_image_src')->extension();
+                // $request->file('book_image_src')->move(public_path('bookImages'),$imageName);
+                // \Log::info($imageName);
+                // $addImageToDb = BookImages::create([
+                //     'books_id'=>$storeBooks->id,
+                //     'image_path'=>'bookImages/'.$imageName
+                // ]);
+            // }
+        // }
 
         return redirect()->route('my-books')->with(['success'=>'Books added successfully.']);
     }
 
-    public function deleteBooks($id){
-        
+    public function deleteImage($id){
+        $id = Crypt::decrypt($id);
+        $findImageToDb = BookImages::where('books_id',$id)->first();
+        if(file_exists(public_path('bookImages/' . $findImageToDb->image_path))){
+            unlink(public_path('bookImages/' . $findImageToDb->image_path));
+        }
+        BookImages::where('books_id', $id)->delete();
+        return redirect()->back();
     }
 }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('authors');
             $table->string('isbn')->nullable();
+            $table->string('category')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

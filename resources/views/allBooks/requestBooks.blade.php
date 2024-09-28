@@ -25,6 +25,6 @@
         </div>
     <div>
     @section('js')
-        <script src="{{ asset('assets/dynamicPart/js/borrowBooks.js') }}"></script>
+        <script src="{{ asset('assets/backend/js/borrowBooks.js') }}"></script>
     @endsection
 @endsection

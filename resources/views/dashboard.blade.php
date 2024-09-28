@@ -9,6 +9,6 @@
     </div>
 </div>
 @section('js')
-    <script src="{{ asset('assets/dynamicPart/js/dashboard.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/dashboard.js') }}"></script>
 @stop
 @endsection

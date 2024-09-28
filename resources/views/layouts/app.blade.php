@@ -27,7 +27,7 @@
     <link href="{{ asset('assets/css/datepicker.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
     <link href="{{ asset('assets/css/responsive.css') }}" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="{{ asset('assets/staticPart/css/common.css') }}"> --}}
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

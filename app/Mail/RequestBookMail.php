@@ -41,7 +41,7 @@ class RequestBookMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'borrowedBooks.email.requestMessage',
+            view: 'allBooks.email.requestMessage',
             with:[
                 'bookOwner'=>$this->bookOwner,
                 'requestMessage'=>$this->message

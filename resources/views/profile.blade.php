@@ -83,7 +83,7 @@
         </div>
     </div>
     @section('js')
-    <script src="{{ asset('assets/staticPart/js/auth.js') }}"></script>
-    <script src="{{ asset('assets/dynamicPart/js/profile.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/auth.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/profile.js') }}"></script>
     @stop
 @endsection
