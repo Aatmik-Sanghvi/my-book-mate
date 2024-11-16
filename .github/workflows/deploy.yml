@@ -3,7 +3,7 @@ name: Laravel Deployment to AWS EC2
 on:
   push:
     branches:
-      - master  # Updated to trigger on 'master' branch
+      - master
 
 jobs:
   deploy:
@@ -11,39 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      # Step 2: Set up PHP environment
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1  # Specify your PHP version
-          extensions: mbstring, bcmath, intl, zip, curl
-          tools: composer
-
-      # Step 3: Install Laravel dependencies
       - name: Install Composer Dependencies
         run: composer install --no-dev --optimize-autoloader
 
-      # Step 4: Sync files to EC2
       - name: Deploy to EC2
         uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # Private SSH key
-          REMOTE_HOST: ${{ secrets.EC2_HOST }}             # Public EC2 IP or DNS
-          REMOTE_USER: ${{ secrets.EC2_USERNAME }}         # EC2 user (e.g., ubuntu)
-          TARGET: /var/www/html/my-book-mate             # Directory on EC2 instance
-          ARGS: "-o StrictHostKeyChecking=no"
-
-      # Step 5: Run Laravel Artisan Commands
-      - name: Run Laravel Artisan Commands
-        run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd /var/www/html/my-laravel-app
-          php artisan migrate --force
-          php artisan cache:clear
-          php artisan config:cache
-          php artisan route:cache
-          EOF
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.EC2_HOST }}
+          REMOTE_USER: ${{ secrets.EC2_USERNAME }}
+          TARGET: /var/www/html/my-book-mate
+          ARGS: "-avz --delete --exclude='.git/' --exclude='node_modules/'"
