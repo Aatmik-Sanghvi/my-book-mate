@@ -108,7 +108,7 @@
                                                 <a class="page-scroll" href="#about">About</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="page-scroll" href="#why">Why?</a>
+                                                <a class="page-scroll" href="#why">Why? </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('login') }}">Login</a>
