@@ -15,6 +15,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      - name: permission1
+        run: chmod 700 ~/.ssh
+          
+      - name: permission2
+        run: chmod 600 ~/.ssh/authorized_keys
+
+
       # Step 4: Sync files to EC2
       - name: Deploy to EC2
         uses: easingthemes/ssh-deploy@main
