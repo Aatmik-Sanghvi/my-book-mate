@@ -14,29 +14,30 @@ jobs:
       # Step 1: Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v2
-        
-      # Step 4: Sync files to EC2
+
+      # Step 2: Deploy files to EC2
       - name: Deploy to EC2
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # Private SSH key
           REMOTE_HOST: ${{ secrets.EC2_HOST }}             # Public EC2 IP or DNS
           REMOTE_USER: ${{ secrets.EC2_USERNAME }}         # EC2 user (e.g., ubuntu)
-          TARGET: "${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/var/www/html/my-book-mate"            # Directory on EC2 instance
+          TARGET: "${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/var/www/html/my-book-mate"  # Ensure full remote path
+          ARGS: "--rsh='ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no'"
 
-     # Step 3: Update SSH Permissions on EC2
+      # Step 3: Update SSH Permissions on EC2
       - name: Update SSH Permissions on EC2
         run: |
-          ssh -i ~/.ssh/${{ secrets.SSH_PUBLIC_KEY }} -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
           # Set correct permissions for the .ssh directory and authorized_keys file
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/authorized_keys
           EOF
-          
-      # Step 5: Run Laravel Artisan Commands
+
+      # Step 4: Run Laravel Artisan Commands
       - name: Run Laravel Artisan Commands
         run: |
-          ssh -i ~/.ssh/${{ secrets.SSH_PUBLIC_KEY }} -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
           cd /var/www/html/my-book-mate
           php artisan migrate --force
           php artisan cache:clear
