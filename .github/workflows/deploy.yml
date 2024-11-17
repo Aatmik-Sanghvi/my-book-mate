@@ -1,22 +1,44 @@
-name: DEPLOY
+name: Laravel Deployment to AWS EC2
+
 on:
   push:
     branches:
-    - master
+      - master
+
 jobs:
   deploy:
+    name: Deploy Laravel to EC2
     runs-on: ubuntu-latest
+
     steps:
-    - name: Set Folder Ownership on EC2
-      run: sudo chown -R www-data:www-data /var/www/html/my-book-mate
-          
-    - uses: actions/checkout@v3
-    - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.1
-      with:
-        switches: -avzr --delete
-        path: src/
-        remote_path: ${{ secrets.TARGET_DIR }}
-        remote_host: ${{ secrets.EC2_HOST }}
-        remote_user: ${{ secrets.EC2_USERNAME }}
-        remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      # Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Deploy files to EC2
+      - name: Deploy to EC2
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.EC2_HOST }}
+          REMOTE_USER: ${{ secrets.EC2_USERNAME }}
+          TARGET: "/var/www/html/my-book-mate"
+          ARGS: "-o StrictHostKeyChecking=no"
+
+      # Ensure correct folder permissions
+      - name: Set Folder Ownership on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+          sudo chown -R www-data:www-data /var/www/html/my-book-mate
+          EOF
+
+      # Run Laravel artisan commands
+      - name: Run Laravel Artisan Commands
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+          cd /var/www/html/my-book-mate
+          php artisan migrate --force
+          php artisan cache:clear
+          php artisan config:cache
+          php artisan route:cache
+          EOF
