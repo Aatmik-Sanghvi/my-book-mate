@@ -19,7 +19,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1  # Specify your PHP version
+          php-version: 8.1.17  # Specify your PHP version
           extensions: mbstring, bcmath, intl, zip, curl
           tools: composer
 
@@ -34,14 +34,14 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # Private SSH key
           REMOTE_HOST: ${{ secrets.EC2_HOST }}             # Public EC2 IP or DNS
           REMOTE_USER: ${{ secrets.EC2_USERNAME }}         # EC2 user (e.g., ubuntu)
-          TARGET: /var/www/html/my-laravel-app             # Directory on EC2 instance
+          TARGET: ${{ secrets.TARGET_DIR }}             # Directory on EC2 instance
           ARGS: "-o StrictHostKeyChecking=no"
 
       # Step 5: Run Laravel Artisan Commands
       - name: Run Laravel Artisan Commands
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd /var/www/html/my-laravel-app
+          cd /var/www/html/my-book-mate
           php artisan migrate --force
           php artisan cache:clear
           php artisan config:cache
