@@ -7,6 +7,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    - name: Set Folder Ownership on EC2
+      run: sudo chown -R ubuntu:www-data /var/www/html/my-book-mate
+          
     - uses: actions/checkout@v3
     - name: rsync deployments
       uses: burnett01/rsync-deployments@7.0.1
