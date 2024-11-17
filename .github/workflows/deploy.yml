@@ -34,7 +34,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # Private SSH key
           REMOTE_HOST: ${{ secrets.EC2_HOST }}             # Public EC2 IP or DNS
           REMOTE_USER: ${{ secrets.EC2_USERNAME }}         # EC2 user (e.g., ubuntu)
-          TARGET: /var/www/html            # Directory on EC2 instance
+          TARGET: "/var/www/html/my-book-mate"            # Directory on EC2 instance
           ARGS: "-o StrictHostKeyChecking=no"
 
       # Step 5: Run Laravel Artisan Commands
