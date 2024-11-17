@@ -26,6 +26,10 @@ jobs:
       # Step 3: Install Laravel dependencies
       - name: Install Composer Dependencies
         run: composer install --no-dev --optimize-autoloader
+      
+      - name: List files in workspace
+      run: ls -la /home/runner/work/my-book-mate/my-book-mate/
+
 
       # Step 4: Sync files to EC2
       - name: Deploy to EC2
