@@ -1,48 +1,18 @@
-name: Laravel Deployment to AWS EC2
+name: Deploy to EC2
 
 on:
   push:
     branches:
-      - master  # Updated to trigger on 'master' branch
+      - main
 
 jobs:
   deploy:
-    name: Deploy Laravel to EC2
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Deploy files to EC2
-      - name: Deploy to EC2
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # Private SSH key
-          REMOTE_HOST: ${{ secrets.EC2_HOST }}             # Public EC2 IP or DNS
-          REMOTE_USER: ${{ secrets.EC2_USERNAME }}         # EC2 user (e.g., ubuntu)
-          # TARGET: "${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/var/www/html/my-book-mate"  # Ensure full remote path
-          TARGET: "/public"
-
-      - name: Setup SSH
+      - name: Rsync files to EC2
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Rsync files
-        run: |
-          rsync -avz -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" ./my-book-mate ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/html/my-book-mate
-
-      # Step 4: Run Laravel Artisan Commands
-      - name: Run Laravel Artisan Commands
-        run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd /var/www/html/my-book-mate
-          php artisan migrate --force
-          php artisan cache:clear
-          php artisan config:cache
-          php artisan route:cache
-          EOF
+          rsync -avz -e "ssh -i ${{ secrets.SSH_PRIVATE_KEY }}" ./ ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:${{ secrets.TARGET_DIR }}
