@@ -24,16 +24,17 @@ jobs:
           REMOTE_USER: ${{ secrets.EC2_USERNAME }}         # EC2 user (e.g., ubuntu)
           # TARGET: "${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/var/www/html/my-book-mate"  # Ensure full remote path
           TARGET: "/public"
-          ARGS: "--rsh='ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no'"
 
-      # Step 3: Update SSH Permissions on EC2
-      - name: Update SSH Permissions on EC2
+      - name: Setup SSH
         run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-          # Set correct permissions for the .ssh directory and authorized_keys file
-          chmod 700 ~/.ssh
-          chmod 600 ~/.ssh/authorized_keys
-          EOF
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Rsync files
+        run: |
+          rsync -avz -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" ./my-book-mate ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/html/my-book-mate
 
       # Step 4: Run Laravel Artisan Commands
       - name: Run Laravel Artisan Commands
