@@ -28,7 +28,7 @@ jobs:
         run: composer install --no-dev --optimize-autoloader
       
       - name: List files in workspace
-        run: ls -la /home/runner/work/my-book-mate/my-book-mate/
+        run: ls -la /home/runner/work/my-book-mate/
 
 
       # Step 4: Sync files to EC2
