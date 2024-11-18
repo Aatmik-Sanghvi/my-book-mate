@@ -28,7 +28,7 @@ jobs:
       # Ensure correct folder permissions
       - name: Set Folder Ownership on EC2
         run: |
-          rsync -avL --progress -e "ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-3-110-160-49.ap-south-1.compute.amazonaws.com"
+          sudo rsync -avL --progress -e "ssh -i /home/ubuntu/.ssh/authorized_keys ubuntu@ec2-3-110-160-49.ap-south-1.compute.amazonaws.com"
       # Run Laravel artisan commands
       - name: Run Laravel Artisan Commands
         run: |
