@@ -15,6 +15,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+        # Set up SSH key
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
       # Deploy files to EC2
       - name: Deploy to EC2
         uses: easingthemes/ssh-deploy@main
@@ -25,14 +32,18 @@ jobs:
           TARGET: "/var/www/html/my-book-mate"
           ARGS: "-o StrictHostKeyChecking=no"
 
-      # Ensure correct folder permissions
+      # Set correct folder permissions
       - name: Set Folder Ownership on EC2
         run: |
-          sudo rsync -avL --progress -e "ssh -i /home/ubuntu/.ssh/authorized_keys ubuntu@ec2-3-110-160-49.ap-south-1.compute.amazonaws.com"
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+          sudo chown -R www-data:www-data /var/www/html/my-book-mate
+          sudo chmod -R 775 /var/www/html/my-book-mate
+          EOF
+
       # Run Laravel artisan commands
       - name: Run Laravel Artisan Commands
         run: |
-          sudo ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
           cd /var/www/html/my-book-mate
           php artisan migrate --force
           php artisan cache:clear
