@@ -28,14 +28,11 @@ jobs:
       # Ensure correct folder permissions
       - name: Set Folder Ownership on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-          sudo chown -R www-data:www-data /var/www/html/my-book-mate
-          EOF
-
+          rsync -avL --progress -e "ssh -i "${{ secrets.SSH_PRIVATE_KEY }}" ubuntu@ec2-3-110-160-49.ap-south-1.compute.amazonaws.com"
       # Run Laravel artisan commands
       - name: Run Laravel Artisan Commands
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+          sudo ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
           cd /var/www/html/my-book-mate
           php artisan migrate --force
           php artisan cache:clear
