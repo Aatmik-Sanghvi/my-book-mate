@@ -35,7 +35,7 @@ jobs:
       # Set correct folder permissions
       - name: Set Folder Ownership on EC2
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-110-160-49.ap-south-1.compute.amazonaws.com << 'EOF'
           sudo chown -R www-data:www-data /var/www/html/my-book-mate
           sudo chmod -R 775 /var/www/html/my-book-mate
           EOF
@@ -43,7 +43,7 @@ jobs:
       # Run Laravel artisan commands
       - name: Run Laravel Artisan Commands
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-110-160-49.ap-south-1.compute.amazonaws.com << 'EOF'
           cd /var/www/html/my-book-mate
           php artisan migrate --force
           php artisan cache:clear
