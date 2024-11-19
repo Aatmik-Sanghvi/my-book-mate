@@ -28,7 +28,7 @@ jobs:
       # Run Laravel artisan commands
       - name: Run Laravel Artisan Commands
         run: |
-          sudo ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-110-160-49.ap-south-1.compute.amazonaws.com << 'EOF'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-3-110-160-49.ap-south-1.compute.amazonaws.com << 'EOF'
           cd /var/www/html/my-book-mate
           php artisan migrate --force
           php artisan cache:clear
