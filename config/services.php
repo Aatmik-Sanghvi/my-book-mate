@@ -39,5 +39,9 @@ return [
 
     'google_api' => [
         'api_key' => env('GOOGLE_API')
+    ],
+
+    'openai' => [
+        'openai_secret' => env('OPEN_AI_API_KEY') 
     ]
 ];

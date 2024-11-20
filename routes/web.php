@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AllBooksController;
+use App\Http\Controllers\AskAIController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,11 @@ Route::middleware('auth')->group(function () {
         Route::post('dashboard/chart',[DashboardController::class, 'dashboardChart'])->name('dashboard-chart');
         //-----------------------------------------------------------------------------------------
 
+        // -------------------------------- Ask AI ----------------------------------------------
+        Route::get('ask-ai',[AskAIController::class, 'getAskAI'])->name('ask-ai');
+        Route::post('ask-ai',[AskAIController::class, 'postAskAi']);
+        // --------------------------------------------------------------------------------------
+
         //------------------------------------ My books ------------------------------------------
         Route::get('my-books',[BooksController::class, 'myBooks'])->name('my-books');
         Route::post('my-books/ajax',[BooksController::class, 'myBooksAjax']);
@@ -66,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //--------------------------------------------------------------------------------------
-    
+
     //------------------------------------Find my books----------------------------------------
     // Route::get('find-books',function(){
     //     return view('findBooks');
