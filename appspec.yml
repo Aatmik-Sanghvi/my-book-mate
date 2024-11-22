@@ -4,4 +4,4 @@ files:
   - source: /
     destination: /var/www/html/my-book-mate
     exclude:
-      - phpunit.xml
+      - /var/www/html/my-book-mate/phpunit.xml
