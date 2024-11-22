@@ -3,3 +3,5 @@ os: linux
 files: 
   - source: /
     destination: /var/www/html/my-book-mate
+    exclude:
+      - phpunit.xml
