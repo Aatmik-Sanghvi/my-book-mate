@@ -78,7 +78,7 @@ class BooksController extends Controller
                 $nestedData['images'] = isset($item->image) ? '<img src="'.asset($item->image).'" alt="book_image" width="100px" height="100px">' : 'No image available';
                 $action = '<div class="text-center">';
                 if($request->page == 'borrowed-books'){
-                    $action .= '<a href="'.route('borrow-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><img src="'.asset('assets/images/booking.png').'" alt="book-id" width="20px" height="20px"></a>';
+                    $action .= '<a href="'.route('borrow-books', Crypt::encrypt($item->id)).'" class="btn btn-primary">Request</a>';
                 }
                 if($request->page == 'my-books'){
                     $action .= '<a href="'.route('view-books', Crypt::encrypt($item->id)).'" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>';

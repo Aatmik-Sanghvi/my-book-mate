@@ -1,7 +1,7 @@
 @extends('layouts.sidebar')
 
 @section('main-dashboard-component')
-<div class="container my-2">
+<div class="container" width="600px" height="600px">
     <hr class="text-color">
     <h2 class="text-color">Dashboard</h2>
     <div> <!-- Adjust width as needed -->

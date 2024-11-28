@@ -219,9 +219,12 @@ a {
 
 #myChart {
     display: block;
-    margin: 0 auto; /* Centers the chart horizontally */
-    max-width: 80%; /* Adjust the percentage based on your needs */
-    height: auto;
+    /* margin-top: 0; */
+    margin: 0 auto;
+    min-width: 40%;
+    max-width: 40%;
+    /* max-width: 80%; Set a fixed max width for stability */
+    /* height: auto; */
 }
 
 .pngToWhite{
