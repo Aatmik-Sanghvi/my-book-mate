@@ -1,7 +1,0 @@
-version: 0.0
-os: linux
-files: 
-  - source: /
-    destination: /var/www/html/my-book-mate
-    exclude:
-      - /var/www/html/my-book-mate/phpunit.xml
