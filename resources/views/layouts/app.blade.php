@@ -111,10 +111,10 @@
                                             <li class="nav-item">
                                                 <a class="page-scroll" href="#why">Why?</a>
                                             </li>
-                                            @if(Auth::check())
+                                            @if (Auth::check())
                                                 <li class="nav-item">
                                                     <a href="{{ route('dashboard') }}">Dashboard</a>
-                                                </li>                   
+                                                </li>
                                             @else
                                                 <li class="nav-item">
                                                     <a href="{{ route('login') }}">Login</a>
@@ -598,7 +598,7 @@
             <!--====== FOOTER PART START ======-->
             <footer id="footer" class="footer-area pt-120">
                 <div class="container">
-                    <div class="subscribe-area wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                    {{-- <div class="subscribe-area wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="subscribe-content mt-45">
@@ -616,8 +616,29 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- row -->
+                    </div> --}}
+                    <div class="subscribe-area wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="subscribe-content mt-45">
+                                    <h2 class="subscribe-title">
+                                        Loved the platform <span>want to here from you.</span>
+                                    </h2>
+                                </div>
+                            {{-- </div> --}}
+                            {{-- <div class="col-lg-6"> --}}
+                                <div class="mt-50">
+                                    <form action="#">
+                                        <input type="text" name="name" class="form-control mt-2" placeholder="Enter your name">
+                                        <input type="email" class="form-control mt-2" name="email" placeholder="Enter your email">
+                                        <textarea class="form-control mt-2" type="text" placeholder="let us know, what's in your mind..."></textarea>
+                                        <button class="main-btn mt-2" id="feedback">Send feedback</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- row -->
                     <!-- subscribe area -->
                     <div class="footer-widget pb-100">
                         <div class="row">
