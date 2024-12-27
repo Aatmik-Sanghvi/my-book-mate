@@ -33,7 +33,8 @@ class GoogleAuthController extends Controller
                     'email'=>$user->email,
                     'google_id'=>$user->id,
                     'password'=>Hash::make('12345678'),
-                    'is_active'=>1
+                    'is_active'=>1,
+                    'profile_photo' =>'default.jpg'
                 ]);
 
                 Auth::login($newUser);

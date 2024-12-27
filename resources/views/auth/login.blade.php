@@ -4,6 +4,7 @@
         <div class="form-content">
             <div class="login-form">
                 <div class="title">Login</div>
+                <p>Login to explore more.</p>
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="input-boxes">
@@ -19,7 +20,7 @@
                         <div class="button input-box">
                             <input type="submit" value="Submit">
                         </div>
-                        <p class="text-center">or</p> --}}
+                        <p class="text-center">or</p>--}}
                         <div class="text-center">
                             <a href="{{ route('signin_google') }}" type="button" class="login-with-google-btn">
                                 Sign in with Google

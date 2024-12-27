@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
+// use App\Http\Controllers\Validator;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -26,17 +29,47 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+{
+    // Get the authenticated user
+    $user = Auth::user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+    // Validate and handle profile photo upload
+    $validator = Validator::make($request->all(), [
+        'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    if ($validator->fails()) {
+        return Redirect::route('profile.edit')
+            ->withErrors($validator)
+            ->withInput();
+    }
+
+    if ($request->hasFile('profile_photo')) {
+        // Delete old profile photo if it exists
+        if ($user->profile_photo && Storage::exists('public/profile_photos/' . $user->profile_photo)) {
+            Storage::delete('public/profile_photos/' . $user->profile_photo);
         }
 
-        $request->user()->save();
+        // Store the new profile photo
+        $fileName = time() . '.' . $request->profile_photo->extension();
+        $request->profile_photo->storeAs('public/profile_photos', $fileName);
 
-        return Redirect::route('profile.edit')->with(['success' => 'User Profile updated successfully.']);
+        // Update the user's profile photo
+        $user->profile_photo = $fileName;
     }
+
+    // Update other profile details
+    $user->fill($request->validated());
+
+    // If email is changed, reset verification
+    if ($user->isDirty('email')) {
+        $user->email_verified_at = null;
+    }
+
+    $user->save();
+
+    return Redirect::route('profile.edit')->with(['success' => 'User Profile updated successfully.']);
+}
 
     /**
      * Delete the user's account.

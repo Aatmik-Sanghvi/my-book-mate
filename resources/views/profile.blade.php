@@ -6,7 +6,7 @@
         <h2 class="text-color">Profile</h2>
         <div class="card mh-100">
             <div class="card-body">
-                <form action="{{ route('profile.update',['id'=>$user->id]) }}" method="POST" id="frmProfile">
+                <form action="{{ route('profile.update',['id'=>$user->id]) }}" method="POST" id="frmProfile" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-6 mt-2">
@@ -65,16 +65,21 @@
                         @error('postal_code')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
-                        {{-- <div class="form-group col-md-6 mt-2">
-                            <label for="profile_photo" class="text-color">Profile Photo</label>
-                            <img src="{{ asset('assets') }}" alt="">
-                            <input type="file" class="form-control text-color required" id="profile_photo" name="profile_photo">
-                        </div>
-                        @error('profile_photo')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror --}}
+
+                        <div class="form-group col-md-6 mt-2">
+    <label for="profile_photo" class="text-color">Profile Photo</label>
+    @if ($user->profile_photo && file_exists(public_path('storage/profile_photos/' . $user->profile_photo)))
+        <img src="{{ asset('storage/profile_photos/' . $user->profile_photo) }}" alt="Profile Photo" class="img-thumbnail mb-2" style="max-width: 150px;">
+    @else
+        <img src="{{ asset('default-profile.png') }}" alt="Default Profile Photo" class="img-thumbnail mb-2" style="max-width: 150px;">
+    @endif
+    <input type="file" class="form-control text-color" id="profile_photo" name="profile_photo">
+</div>
+
+@error('profile_photo')
+    <div class="text-danger">{{ $message }}</div>
+@enderror
                         <div class="form-group mt-2">
-                            {{-- <input type="submit" value="Submit"> --}}
                             <button class="btn btn-primary" type="submit">Save</button>
                         </div>
                     </div>
