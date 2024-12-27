@@ -8,6 +8,7 @@ use App\Models\BookImages;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
 
 // For fetching location based on ip address
 // use Stevebauman\Location\Facades\Location;
@@ -43,10 +44,7 @@ class BooksController extends Controller
         }
         // else condition is for getting the list of books that are present in the user city.
         else if($request->page == 'borrowed-books'){
-            $books = Books::where('user_id','!=',Auth::user()->id)->whereHas('user', function($query) use ($city){
-                $query->where('city',$city);
-            });
-            \Log::info($request->category);
+            $books = Books::where('user_id','!=',Auth::user()->id);
         }
 
         $isAnyBookPresent = $books->count();
@@ -145,7 +143,7 @@ class BooksController extends Controller
             // foreach($request->file('book_images') as $file){
                 $imageName = time().'.'.$request->file('book_image')->extension();
                 $request->file('book_image')->move(public_path('bookImages'),$imageName);
-                \Log::info($imageName);
+                Log::info($imageName);
                 $updatingImageToDb = BookImages::create([
                     'books_id'=>$id,
                     'image_path'=>'bookImages/'.$imageName
@@ -200,5 +198,9 @@ class BooksController extends Controller
         }
         BookImages::where('books_id', $id)->delete();
         return redirect()->back();
+    }
+
+    public function requestBooks(){
+
     }
 }
