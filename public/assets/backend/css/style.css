@@ -3,9 +3,10 @@
 :root {
     --header-height: 3rem;
     --nav-width: 68px;
-    --first-color: #E88D67;
+    --first-color: #D8D2C2;
     --first-color-light: #F3F7EC;
-    --white-color: #F7F6FB;
+    --black-color: #000000;
+    --white-color: rgb(255, 255, 255);
     --active-link:#005C78;
     --body-font: 'Nunito', sans-serif;
     --normal-font-size: 1rem;
@@ -41,13 +42,13 @@ a {
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    background-color: var(--white-color);
+    background-color: white;
     z-index: var(--z-fixed);
     transition: .5s
 }
 
 .header_toggle {
-    color: var(--first-color);
+    color: var(--black-color);
     font-size: 1.5rem;
     cursor: pointer
 }
@@ -71,10 +72,15 @@ a {
     left: -30%;
     width: var(--nav-width);
     height: 100vh;
-    background-color: var(--first-color);
+    background-color: var(--white-color);
     padding: .5rem 1rem 0 0;
     transition: .5s;
     z-index: var(--z-fixed)
+}
+
+#nav-bar{
+  padding-top: 0;
+  /* padding-right: 0; */
 }
 
 .nav {
@@ -82,7 +88,8 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden
+    overflow: hidden;
+    border-right:2px solid #fe6e9a; 
 }
 
 .nav_logo,
@@ -91,7 +98,7 @@ a {
     grid-template-columns: max-content max-content;
     align-items: center;
     column-gap: 1rem;
-    padding: .5rem 0 .5rem 1.5rem
+    padding: .5rem 0 .5rem 1.5rem;
 }
 
 .nav_logo {
@@ -100,23 +107,25 @@ a {
 
 .nav_logo-icon {
     font-size: 1.25rem;
-    color: var(--white-color)
+    color: var(--black-color)
 }
 
 .nav_logo-name {
-    color: var(--white-color);
+    color: var(--black-color);
     font-weight: 700
 }
 
 .nav_link {
     position: relative;
-    color: var(--first-color-light);
-    margin-bottom: 1.5rem;
-    transition: .3s
+    color: var(--black-color);
+    /* margin-bottom: 1.5rem; */
+    transition: .3s;
+    margin-top: 5px;
 }
 
 .nav_link:hover, .page_header_link:hover {
-    color: var(--active-link)
+  color: var(--black-color);
+  background: #D8D2C2;
 }
 
 .nav_icon {
@@ -131,12 +140,17 @@ a {
     padding-left: calc(var(--nav-width) + 1rem)
 }
 
-.active {
+/* .active {
     color: var(--active-link)
-}
+} */
 
 .page_header_link.active{
     color: var(--active-link)
+}
+
+.nav_link.active{
+  color: black;
+  background: #D8D2C2;
 }
 
 .nav_link.active::before {
@@ -145,7 +159,7 @@ a {
     left: 0;
     width: 2px;
     height: 32px;
-    background-color: var(--active-link)
+    /* background-color: var(--active-link); */
 }
 
 .height-100 {
@@ -153,19 +167,22 @@ a {
 }
 
 .btn-primary{
-    background: var(--first-color);
-    color: var(--first-color-light);
-    border: 1px solid var(--white-color);
+    background: white;
+    /* var(--first-color); */
+    color: black;
+    /* border: 1px solid var(--white-color); */
+    border: 1px solid black;
+
 }
 
 .btn-primary:hover{
-    background: var(--white-color);
-    color: var(--first-color);
-    border: 1px solid var(--first-color);
+    background: #D8D2C2;
+    color: var(--black-color);
+    border: 1px solid var(--black-color);
 }
 
 .text-color{
-    color: var(--first-color);
+    color: var(--black-color);
 }
 
 .error{
@@ -234,6 +251,11 @@ a {
 .pngToWhite:hover{
     filter: none;
     /* color:var(--active-link); */
+}
+
+.readonly-color{
+  background-color: #d3d4d0;
+  pointer-events:none;
 }
 
 /*===== All Preloader Style =====*/
@@ -505,7 +527,7 @@ a {
         padding: 1rem 1rem 0 0
     }
 
-    .show {
+    .l-navbar.show {
         width: calc(var(--nav-width) + 156px)
     }
 

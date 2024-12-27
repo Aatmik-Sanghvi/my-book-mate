@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
         Route::get('my-books',[BooksController::class, 'myBooks'])->name('my-books');
         Route::post('my-books/ajax',[BooksController::class, 'myBooksAjax']);
         Route::get('view-books/{id}',[BooksController::class, 'viewBooks'])->name('view-books');
+        Route::get('request-books/{id}',[BooksController::class, 'requestBooks'])->name('request-books');
         Route::get('edit-books/{id}',[BooksController::class, 'editBooks'])->name('edit-books');
         Route::get('deleteImage/{id}',[BooksController::class, 'deleteImage'])->name('deleteImage');
         Route::post('update-books/{id}',[BooksController::class, 'updateBooks'])->name('update-books');

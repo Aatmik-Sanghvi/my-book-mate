@@ -29,8 +29,8 @@
 }
 
 .user-message p {
-    background-color: #E88D67;
-    color: white;
+    background-color: whitesmoke;
+    color: black;
     align-self: flex-end;
     text-align: right;
 }

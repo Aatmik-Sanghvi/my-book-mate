@@ -21,7 +21,6 @@ const chatMessages = document.getElementById('chatMessages');
 $(document).ready(function(){
     $('#askClicked').on('click', function() {
         const userMessage = chatInput.value.trim();
-        console.log(userMessage);
         if (userMessage) {
             const userMessageElem = document.createElement('div');
             userMessageElem.classList.add('chat-message', 'user-message','mt-2');
@@ -55,7 +54,23 @@ $(document).ready(function(){
                     setTimeout(() => {
                         const assistantMessageElem = document.createElement('div');
                         assistantMessageElem.classList.add('chat-message', 'assistant-message');
-                        assistantMessageElem.innerHTML = `<p>${res}</p>`;
+                        // assistantMessageElem.innerHTML = `<p>${res}</p>`;
+                          = `<table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Book Name</th>
+                                            <th scope="col">About Book</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                    </tbody>
+                                </table>`;
                         $('#spinner').hide();
                         chatMessages.appendChild(assistantMessageElem);
 
