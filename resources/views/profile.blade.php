@@ -39,14 +39,14 @@
                         @enderror
                         <div class="form-group col-md-6 mt-2">
                             <label for="city" class="text-color">City</label>
-                            <input type="text" class="form-control text-color required" id="city" name="city" placeholder="Enter your city" value="{{ $user->city }}">
+                            <input type="text" class="form-control text-color required" id="city" name="city" placeholder="Enter your city" value="Ahmedabad">
                         </div>
                         @error('city')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group col-md-6 mt-2">
                             <label for="state" class="text-color">State</label>
-                            <input type="text" class="form-control text-color required" id="state" name="state" placeholder="Enter your state" value="{{ $user->state }}">
+                            <input type="text" class="form-control text-color required" id="state" name="state" placeholder="Enter your state" value="Gujarat">
                         </div>
                         @error('state')
                             <div class="text-danger">{{ $message }}</div>

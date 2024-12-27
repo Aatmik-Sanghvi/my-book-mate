@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="{{ asset('assets/backend/css/style.css') }}">
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.responsive.datatable.css') }}">
 
     <!-- Scripts -->

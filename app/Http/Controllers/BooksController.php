@@ -56,7 +56,7 @@ class BooksController extends Controller
                 $query
                     ->where('title','LIKE',"%{$search}%")
                     ->orWhere('authors','LIKE',"%{$search}%")
-                    ->orWhere('isbn','LIKE',"%{$search}%")
+                    // ->orWhere('isbn','LIKE',"%{$search}%")
                     ->orwhere('category','LIKE',"%{$search}%");
             });
         }
@@ -73,7 +73,7 @@ class BooksController extends Controller
                 // $nestedData['id'] = $item->id;
                 $nestedData['title'] = $item->title;
                 $nestedData['authors'] = $item->authors;
-                $nestedData['isbn'] = $item->isbn ?? 'NA';
+                // $nestedData['isbn'] = $item->isbn ?? 'NA';
                 $nestedData['category'] = ucfirst($item->category) ?? 'NA';
                 $nestedData['images'] = isset($item->image) ? '<img src="'.asset($item->image).'" alt="book_image" width="100px" height="100px">' : 'No image available';
                 $action = '<div class="text-center">';

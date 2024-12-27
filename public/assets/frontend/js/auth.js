@@ -30,12 +30,27 @@ $(document).ready(function(){
     });
 
     var autocomplete;
+    var autocomplete2;
 
     autocomplete = new google.maps.places.Autocomplete((document.getElementById('address')));
+    autocomplete2 = new google.maps.places.Autocomplete((document.getElementById('city')));
 
     autocomplete.addListener('place_changed',onPlaceChange)
+    autocomplete2.addListener('place_changed',onPlaceChange2);
 
-    function onPlaceChange(){
+    function onPlaceChange2(){
+        let responseLength = autocomplete2.getPlace().address_components.length;
+        let component = autocomplete2.getPlace().address_components;
+        if(responseLength > 0){
+            for (let i = 0; i < responseLength; i++) {
+                if(component[i].types.includes('administrative_area_level_3')){
+                    return $('#city').val(component[i].long_name);
+                }
+            }
+        }
+    }
+
+    function onPlaceChange(){        
         console.log(autocomplete.getPlace().address_components);
         let responseLength = autocomplete.getPlace().address_components.length;
         let component = autocomplete.getPlace().address_components;
