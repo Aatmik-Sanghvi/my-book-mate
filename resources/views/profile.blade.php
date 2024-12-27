@@ -39,21 +39,21 @@
                         @enderror
                         <div class="form-group col-md-6 mt-2">
                             <label for="city" class="text-color">City</label>
-                            <input type="text" class="form-control text-color required" id="city" name="city" placeholder="Enter your city" value="Ahmedabad">
+                            <input type="text" class="form-control text-color readonly-color" id="city" name="city" placeholder="Enter your city" value="Ahmedabad" readonly>
                         </div>
                         @error('city')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group col-md-6 mt-2">
                             <label for="state" class="text-color">State</label>
-                            <input type="text" class="form-control text-color required" id="state" name="state" placeholder="Enter your state" value="Gujarat">
+                            <input type="text" class="form-control text-color readonly-color" id="state" name="state" placeholder="Enter your state" value="Gujarat" readonly>
                         </div>
                         @error('state')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group col-md-6 mt-2">
                             <label for="country" class="text-color">Country</label>
-                            <input type="text" class="form-control text-color required" id="country" name="country" placeholder="Enter your country" value="{{ $user->country }}">
+                            <input type="text" class="form-control text-color readonly-color" id="country" name="country" placeholder="Enter your country" value="India" readonly>
                         </div>
                         @error('country')
                             <div class="text-danger">{{ $message }}</div>
