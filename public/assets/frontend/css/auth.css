@@ -108,6 +108,9 @@ body{
   align-items: center;
   justify-content: space-between;
 }
+.container.login .form-content {
+  text-align: center;
+}
 .form-content .login-form,
 .form-content .signup-form{
   width: calc(100% / 2 - 25px);
@@ -121,7 +124,7 @@ body{
 .forms .form-content .title:before{
   content: '';
   position: absolute;
-  left: 0;
+  /* left: 0; */
   bottom: 0;
   height: 3px;
   width: 25px;
@@ -241,11 +244,15 @@ body{
       0 0 0 3px #c8dafc;
   }
 }
-
+.container.login {
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+}
 @media (max-width: 730px) {
-  .container .cover{
+   .container .cover{
     display: none;
-  }
+  } 
   .form-content .login-form,
   .form-content .signup-form{
     width: 100%;

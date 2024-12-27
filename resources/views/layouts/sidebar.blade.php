@@ -40,7 +40,15 @@
     </div>
     <header class="header body-pd" id="header">
         <div class="header_toggle"> <i class='bx bx-menu bx-x' id="header-toggle"></i> </div>
-        <div class="header_img"> <a href="{{ route('profile.edit') }}"> <img src="https://wallpapers.com/images/hd/hulk-giga-chad-kitllbmowcod6hup.jpg" alt="no-image"> </a> </div>
+        <div class="header_img">
+    <a href="{{ route('profile.edit') }}">
+        @if (Auth::user()->profile_photo && file_exists(public_path('storage/profile_photos/' . Auth::user()->profile_photo)))
+            <img src="{{ asset('storage/profile_photos/' . Auth::user()->profile_photo) }}" alt="Profile Photo">
+        @else
+            <img src="{{ asset('default-profile.png') }}" alt="Default Profile">
+        @endif
+    </a>
+</div>
     </header>
     <div class="l-navbar show" id="nav-bar">
         <nav class="nav">

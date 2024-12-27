@@ -2,7 +2,7 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/auth.css') }}">
-    <div class="container">
+    <div class="container login">
         <div class="cover">
             @if (Route::currentRouteName() == 'login')
                 <div class="front">

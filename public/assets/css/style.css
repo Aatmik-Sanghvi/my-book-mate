@@ -2160,3 +2160,19 @@ p {
 .pb-225 {
   padding-bottom: 225px;
 }
+
+.header_img img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block; /* Ensures the image is a block element */
+  overflow: hidden; /* Contains the image within border radius */
+}
+
+.header_img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Contains child elements */
+}
