@@ -253,6 +253,11 @@ a {
     /* color:var(--active-link); */
 }
 
+.readonly-color{
+  background-color: #d3d4d0;
+  pointer-events:none;
+}
+
 /*===== All Preloader Style =====*/
 .preloader {
     /* Body Overlay */
