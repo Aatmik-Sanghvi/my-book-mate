@@ -21,7 +21,7 @@ $(document).ready(function () {
             // { data: 'id', name: 'id', orderable: true },
             { data: "title", name: "title" },
             { data: "authors", name: "authors" },
-            { data: "isbn", name: "isbn" },
+            // { data: "isbn", name: "isbn" },
             { data: "category", name: "category"},
             { data: "images", name: "images", orderable: false },
             { data: "action", name: "action", orderable: false },
