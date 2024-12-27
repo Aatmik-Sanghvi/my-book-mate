@@ -4,7 +4,6 @@ $(document).ready(function () {
             title: { required: true },
             authors: { required: true },
             // isbn:{required:true},
-            "book_images[]": { required: true },
         },
     });
 
@@ -31,8 +30,6 @@ $(document).ready(function () {
                             : null; // Use a default image if none available
 
                         var category = item.volumeInfo.categories
-                        console.log(category[0]);
-                        
                         
                         return `
                             <li class="list-group-item">

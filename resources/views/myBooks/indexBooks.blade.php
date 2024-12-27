@@ -1,5 +1,10 @@
 @extends('layouts.sidebar')
 @section('main-dashboard-component')
+    <style>
+        label{
+            margin-bottom: 10px;
+        }
+    </style>
     <div class="container">
         <h2 class="text-color">My Books</h2>
         <div class="text-end">

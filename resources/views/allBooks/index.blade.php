@@ -1,10 +1,15 @@
 @extends('layouts.sidebar')
 @section('main-dashboard-component')
+<style>
+    label{
+        margin-bottom: 10px;
+    }
+</style>
     <div class="container">
         <h2 class="text-color">All Books</h2>
         <hr class="text-color">
 
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="no-books" hidden>
             <p class="mt-2">
                 <b>Note: </b>It looks like there are no books available in your city try updating your address in profile.<br>
                 But imagine the possibilities when your friends, family, and community join in! Head over to the referral
@@ -54,7 +59,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table class="table display responsive nowrap data-table sp-table mb-0" id="data-table" style="width:100%"
+            <table class="table table-bordered display responsive nowrap data-table sp-table mb-0" id="data-table" style="width:100%"
                 data-page="borrowed-books">
                 <thead>
                     <tr>
