@@ -18,7 +18,8 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_api.api_key') }}&loading=async&libraries=places"></script>
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_api.api_key') }}&loading=async&libraries=places">
+    </script>
 </head>
 
 <body id="body-pd" class="body-pd">
@@ -41,14 +42,14 @@
     <header class="header body-pd" id="header">
         <div class="header_toggle"> <i class='bx bx-menu bx-x' id="header-toggle"></i> </div>
         <div class="header_img">
-    <a href="{{ route('profile.edit') }}">
-        @if (Auth::user()->profile_photo && file_exists(public_path('storage/profile_photos/' . Auth::user()->profile_photo)))
-            <img src="{{ asset('storage/profile_photos/' . Auth::user()->profile_photo) }}" alt="Profile Photo">
-        @else
-            <img src="{{ asset('default-profile.png') }}" alt="Default Profile">
-        @endif
-    </a>
-</div>
+            <a href="{{ route('profile.edit') }}">
+                @if (Auth::user()->profile_photo && file_exists(public_path('storage/profile_photos/' . Auth::user()->profile_photo)))
+                    <img src="{{ asset('storage/profile_photos/' . Auth::user()->profile_photo) }}" alt="Profile Photo">
+                @else
+                    <img src="{{ asset('assets/images/dummy_profile.png') }}" alt="Default Profile">
+                @endif
+            </a>
+        </div>
     </header>
     <div class="l-navbar show" id="nav-bar">
         <nav class="nav">
@@ -56,11 +57,13 @@
                 <a href="{{ route('dashboard') }}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
                         class="nav_logo-name">My Book Mate</span> </a>
                 <div class="nav_list">
-                    <a href="{{ route('dashboard') }}" class="nav_link @if (Route::currentRouteName() == 'dashboard') active @endif">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav_link @if (Route::currentRouteName() == 'dashboard') active @endif">
                         <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
                     <a href="{{ route('ask-ai') }}" class="nav_link @if (Route::currentRouteName() == 'ask-ai') active @endif">
                         <i class='bx bx-search nav_icon'></i> <span class="nav_name">Ask AI</span></a>
-                    <a href="{{ route('all-books') }}" class="nav_link @if (Route::currentRouteName() == 'all-books') active @endif"> 
+                    <a href="{{ route('all-books') }}"
+                        class="nav_link @if (Route::currentRouteName() == 'all-books') active @endif">
                         {{-- <img src="{{ asset('assets/images/bookshelf.png') }}" class="pngToWhite" alt="bookShelf" width="20px" height="20px">  --}}
                         <i class="fa-solid fa-table-list"></i>
                         <span class="nav_name">All books</span></a>
