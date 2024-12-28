@@ -91,4 +91,8 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function change_profile_pic(Request $request){
+        dd($request);
+    }
 }
