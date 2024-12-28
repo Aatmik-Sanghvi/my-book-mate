@@ -43,10 +43,10 @@
         <div class="header_toggle"> <i class='bx bx-menu bx-x' id="header-toggle"></i> </div>
         <div class="header_img">
             <a href="{{ route('profile.edit') }}">
-                @if (Auth::user()->profile_photo && file_exists(public_path('storage/profile_photos/' . Auth::user()->profile_photo)))
-                    <img src="{{ asset('storage/profile_photos/' . Auth::user()->profile_photo) }}" alt="Profile Photo">
+                @if (Auth::user()->profile_photo)
+                    <img src="{{ Storage::disk('s3')->url(Auth::user()->profile_photo) }}" alt="Profile Photo">
                 @else
-                    <img src="{{ asset('assets/images/dummy_profile.png') }}" alt="Default Profile">
+                    <img src="{{ asset('assets/images/dummy_profile.png') }}" alt="Default Profile" style="max-width: 50px; height: 50px; border-radius: 50%;">
                 @endif
             </a>
         </div>

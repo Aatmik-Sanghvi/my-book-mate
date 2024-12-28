@@ -20,12 +20,12 @@
 
                         <div class="form-group col-md-12 d-flex flex-wrap justify-content-center">
                             {{-- <label for="profile_photo" class="text-color">Profile Photo</label> --}}
-                            @if ($user->profile_photo && file_exists(public_path('storage/profile_photos/' . $user->profile_photo)))
-                                <img src="{{ asset('storage/profile_photos/' . $user->profile_photo) }}" alt="Profile Photo"
-                                    class="img-thumbnail mb-2 changeImg" style="max-width: 150px;">
+                            @if ($user->profile_photo)
+                                <img src="{{ Storage::disk('s3')->url($user->profile_photo) }}" alt="Profile Photo"
+                                    class="img-thumbnail mb-2 changeImg" style="width: 100px; height: 98px; border-radius: 50%;">
                             @else
                                 <img src="{{ asset('assets/images/dummy_profile.png') }}" alt="Default Profile Photo"
-                                    class="img-thumbnail mb-2 changeImg" style="max-width: 100px; height: 100px; border-radius: 50%;">
+                                    class="img-thumbnail mb-2 changeImg" style="width: 100px; height: 98px; border-radius: 50%;">
                             @endif
                             <input type="file" class="form-control text-color" id="profile_photo" name="profile_photo" hidden accept="image/*">
                         </div>
@@ -126,6 +126,9 @@
         </div>
     </div>
 @section('js')
+    <script>
+        var oldFile = "{{ $user->profile_photo }}";
+    </script>
     <script src="{{ asset('assets/frontend/js/auth.js') }}"></script>
     <script src="{{ asset('assets/backend/js/profile.js') }}"></script>
 @stop
