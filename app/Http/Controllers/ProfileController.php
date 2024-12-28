@@ -6,11 +6,13 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 // use App\Http\Controllers\Validator;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -93,6 +95,24 @@ class ProfileController extends Controller
     }
 
     public function change_profile_pic(Request $request){
-        dd($request);
+        if(!is_null($request->file('profile_image'))){
+            $profile_image = $request->file('profile_image')->store('profilePic');
+            User::find(Auth::user()->id)->update([
+                'profile_photo'=>$profile_image
+            ]);
+            
+            if(!is_null($request->old_image)){
+                Storage::disk('s3')->delete($request->old_image);
+            }
+            
+            Log::info($profile_image);
+            return response()->json([
+                'image_url'=>Storage::disk('s3')->url($profile_image),
+                'success'=>'Profile image updated successfully!'
+            ]);
+        }
+        return response()->json([
+            'error'=>'Something went wrong! Profile pic not updated'
+        ]);
     }
 }

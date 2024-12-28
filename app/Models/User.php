@@ -29,7 +29,8 @@ class User extends Authenticatable
         'postal_code',
         'google_id',
         'phone_number',
-        'is_active'
+        'is_active',
+        'profile_photo'
     ];
 
     public function books(){

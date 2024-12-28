@@ -5,11 +5,11 @@ $(document).ready(function(){
     });
 
     $('#profile_photo').on('change', function(event){
-
         var file = event.target.files[0];
         if(file){
             var formData = new FormData();
             formData.append('profile_image',file);
+            formData.append('old_image',oldFile);
         
             $.ajax({
                 headers:{
@@ -21,12 +21,14 @@ $(document).ready(function(){
                 processData: false, // Do not process the data
                 contentType: false, // Do not set content type
                 success:function(response){
-                    $('.changeImg').attr('src',response.image_url);
-                    toastr.success('Profile image updated successfully!')
+                    $('.changeImg, .header_img a img').attr('src',response.image_url);
+                    toastr.success(response.success)
                 },
                 error:function(xhr, status, error){
-                    console.error('Error updating profile image:', error);
-                    toastr.error('Something went wrong! we are working on it.');
+                    console.error("XHR:", xhr);
+                    console.error("Status:", status);
+                    console.error("Error:", error);
+                    toastr.error(error);
                 }
             });
         }
