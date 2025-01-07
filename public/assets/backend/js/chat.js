@@ -51,32 +51,34 @@ $(document).ready(function(){
                     chatMessages.scrollTop = chatMessages.scrollHeight;
 
                     // Simulate assistant response (for demonstration)
-                    setTimeout(() => {
+                    // setTimeout(() => {
                         const assistantMessageElem = document.createElement('div');
                         assistantMessageElem.classList.add('chat-message', 'assistant-message');
-                        // assistantMessageElem.innerHTML = `<p>${res}</p>`;
-                          = `<table class="table">
+                        assistantMessageElem.innerHTML = 
+                          `<table class="table">
                                     <thead>
                                         <tr>
+                                            <th scope="col">#</th>
                                             <th scope="col">Book Name</th>
                                             <th scope="col">About Book</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    ${Object.entries(res).map(([_, value],index) => `
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td>${index+1}</td>
+                                            <td>${value.book_name}</td>
+                                            <td>${value.summary}</td>
                                         </tr>
+                                    `).join('')}
                                     </tbody>
                                 </table>`;
                         $('#spinner').hide();
                         chatMessages.appendChild(assistantMessageElem);
 
-                        // Scroll to the latest message
+                    //     // Scroll to the latest message
                         chatMessages.scrollTop = chatMessages.scrollHeight;
-                    }, 1000);
+                    // }, 1000);
                 }
             })
         }

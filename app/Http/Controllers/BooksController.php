@@ -73,7 +73,7 @@ class BooksController extends Controller
                 $nestedData['authors'] = $item->authors;
                 // $nestedData['isbn'] = $item->isbn ?? 'NA';
                 $nestedData['category'] = ucfirst($item->category) ?? 'NA';
-                $nestedData['images'] = isset($item->image) ? '<img src="'.asset($item->image).'" alt="book_image" width="100px" height="100px">' : 'No image available';
+                $nestedData['images'] = isset($item->image) ? '<img src="'.asset($item->image).'" alt="book_image" width="50px" height="50px">' : 'No image available';
                 $action = '<div class="text-center">';
                 if($request->page == 'borrowed-books'){
                     $action .= '<a href="'.route('borrow-books', Crypt::encrypt($item->id)).'" class="btn btn-primary">Request</a>';
@@ -144,7 +144,7 @@ class BooksController extends Controller
                 $imageName = time().'.'.$request->file('book_image')->extension();
                 $request->file('book_image')->move(public_path('bookImages'),$imageName);
                 Log::info($imageName);
-                $updatingImageToDb = BookImages::create([
+                $updatingImageToDb = BookImages::create([ 
                     'books_id'=>$id,
                     'image_path'=>'bookImages/'.$imageName
                 ]);
